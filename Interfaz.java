@@ -1,5 +1,5 @@
+
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
@@ -23,6 +23,10 @@ public class Interfaz extends JFrame implements ActionListener {
     int indicePosicionB7;
     int indicePosicionB8;
     int indicePosicionB9;
+    Jugador actualJugador;
+    int colorActual;
+    int turno = 1;
+    int id;
 
     public Interfaz(Jugador jugador1, Jugador jugador2) {
         this.jugador1 = jugador1;
@@ -45,8 +49,8 @@ public class Interfaz extends JFrame implements ActionListener {
         if (e.getSource() == bMenu) {
             setVisible(false);
             // ventanaJuego(720, 680, 7, 6, jugador1, jugador2);
-            ventanaJuego(820, 760, 8, 7);
-            // ventanaJuego(920, 840, 9, 8, jugador1, jugador2);
+            // ventanaJuego(820, 760, 8, 7);
+            ventanaJuego(920, 840, 9, 8);
         }
     }
 
@@ -73,35 +77,22 @@ public class Interfaz extends JFrame implements ActionListener {
 
         dibujo = new int[w][h];
 
+        for (int i = 0; i < w; i++) {
+            for (int j = 0; j < h; j++) {
+                dibujo[i][j] = 255 * 65536 + 255 * 256 + 255;
+            }
+        }
+
         for (int i = 0; i <= w - 20; i += (w / x) - 3) {
             dibujarLinea(i, i + 20, 150, h);
         }
         for (int i = 150; i <= h - 20; i += 81) {
             dibujarLinea(0, w, i, i + 20);
         }
-        // dibujarCirculo(60, 200, 20, Color.RED);
+
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
-
-                switch (dibujo[i][j]) {
-                    case 0:
-                        imagen.setRGB(i, j, Color.WHITE.getRGB());
-                        break;
-                    case 1:
-                        imagen.setRGB(i, j, Color.BLACK.getRGB());
-                        break;
-                    case 2:
-                        imagen.setRGB(i, j, Color.RED.getRGB());
-                        break;
-                    case 3:
-                        imagen.setRGB(i, j, Color.BLUE.getRGB());
-                        break;
-                    case 4:
-                        imagen.setRGB(i, j, Color.YELLOW.getRGB());
-                        break;
-                    default:
-                        imagen.setRGB(i, j, Color.GREEN.getRGB());
-                } // swithc
+                imagen.setRGB(i, j, dibujo[i][j]);
             } // for
         } // for
 
@@ -112,7 +103,6 @@ public class Interfaz extends JFrame implements ActionListener {
         JLabel imagenLabel = new JLabel(new ImageIcon(imagen));
         imagenLabel.setBounds(0, 0, w, h);
         layeredPane.add(imagenLabel, JLayeredPane.DEFAULT_LAYER);
-
         // Crea un panel para los componentes
         JPanel panel = new JPanel();
         panel.setLayout(null);
@@ -121,9 +111,9 @@ public class Interfaz extends JFrame implements ActionListener {
         // Agrega el JLabel al panel
         JLabel l1 = new JLabel(jugador1.getNombre(), JLabel.CENTER);
         JLabel l2 = new JLabel(jugador2.getNombre(), JLabel.CENTER);
-        l1.setForeground(Color.RED);
+        l1.setForeground(Color.getColor("j1", jugador1.color));
         l1.setBounds((int) 0, 0, 60, 30);
-        l2.setForeground(Color.BLUE);
+        l2.setForeground(Color.getColor("j2", jugador2.color));
         l2.setBounds(w - 100, 0, 60, 30);
         panel.add(l2);
         panel.add(l1);
@@ -139,8 +129,10 @@ public class Interfaz extends JFrame implements ActionListener {
         b1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                accionBoton(tablero, 60, y, 0, frame, indicePosicionB1);
+                accionBoton(w, h, tablero, 60, y, 0, indicePosicionB1, colorActual, id);
+                cambioJugador();
                 indicePosicionB1--;
+                recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
 
             }
         });
@@ -149,8 +141,10 @@ public class Interfaz extends JFrame implements ActionListener {
         b2.setBounds(129, 100, 60, 40);
         b2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                accionBoton(tablero, 160, y, 1, frame, indicePosicionB2);
+                cambioJugador();
+                accionBoton(w, h, tablero, 160, y, 1, indicePosicionB2, colorActual, id);
                 indicePosicionB2--;
+                recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
             }
         });
 
@@ -158,8 +152,11 @@ public class Interfaz extends JFrame implements ActionListener {
         b3.setBounds(229, 100, 60, 40);
         b3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                accionBoton(tablero, 260, y, 2, frame, indicePosicionB3);
+                cambioJugador();
+                accionBoton(w, h, tablero, 260, y, 2, indicePosicionB3, colorActual, id);
                 indicePosicionB3--;
+                recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
+
             }
         });
 
@@ -168,24 +165,33 @@ public class Interfaz extends JFrame implements ActionListener {
 
         b4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                accionBoton(tablero, 360, y, 3, frame, indicePosicionB4);
+                cambioJugador();
+                accionBoton(w, h, tablero, 360, y, 3, indicePosicionB4, colorActual, id);
                 indicePosicionB4--;
+                recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
+
             }
         });
         b5.setBounds(429, 100, 60, 40);
 
         b5.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                accionBoton(tablero, 460, y, 4, frame, indicePosicionB5);
+                cambioJugador();
+                accionBoton(w, h, tablero, 460, y, 4, indicePosicionB5, colorActual, id);
                 indicePosicionB5--;
+                recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
+
             }
         });
         b6.setBounds(529, 100, 60, 40);
 
         b6.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                accionBoton(tablero, 560, y, 5, frame, indicePosicionB6);
+                cambioJugador();
+                accionBoton(w, h, tablero, 560, y, 5, indicePosicionB6, colorActual, id);
                 indicePosicionB6--;
+                recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
+
             }
         });
 
@@ -193,8 +199,11 @@ public class Interfaz extends JFrame implements ActionListener {
 
         b7.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                accionBoton(tablero, 660, y, 6, frame, indicePosicionB7);
+                cambioJugador();
+                accionBoton(w, h, tablero, 660, y, 6, indicePosicionB7, colorActual, id);
                 indicePosicionB7--;
+                recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
+
             }
         });
 
@@ -204,8 +213,11 @@ public class Interfaz extends JFrame implements ActionListener {
 
             b8.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    accionBoton(tablero, 760, y, 7, frame, indicePosicionB8);
+                    cambioJugador();
+                    accionBoton(w, h, tablero, 760, y, 7, indicePosicionB8, colorActual, id);
                     indicePosicionB8--;
+                    recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
+
                 }
             });
 
@@ -218,8 +230,11 @@ public class Interfaz extends JFrame implements ActionListener {
 
             b9.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    accionBoton(tablero, 860, y, 8, frame, indicePosicionB9);
+                    cambioJugador();
+                    accionBoton(w, h, tablero, 860, y, 8, indicePosicionB9, colorActual, id);
                     indicePosicionB9--;
+                    recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
+
                 }
             });
             frame.add(b9);
@@ -255,15 +270,6 @@ public class Interfaz extends JFrame implements ActionListener {
         }
     }
 
-    public void dibujarCirculo(int x, int y, int radio, Color color) {
-        if (imagen != null) {
-            Graphics g = imagen.getGraphics();
-            g.setColor(color);
-            g.fillOval(x - radio, y - radio, 2 * radio, 2 * radio);
-            repaint();
-        }
-    }
-
     public void imprimirMatriz(int[][] matriz) {
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[i].length; j++) {
@@ -278,22 +284,82 @@ public class Interfaz extends JFrame implements ActionListener {
         return nombre;
     }
 
-    private void accionBoton(int[][] tablero, int x, int y, int columna, JFrame frame, int indice) {
+    private void accionBoton(int w, int h, int[][] tablero, int x, int y, int columna, int indice, int color, int id) {
         for (int i = y - 1; i >= 0; i--) {
             if (tablero[i][columna] == 0) {
-                tablero[i][columna] = 1;
+                tablero[i][columna] = id;
                 break;
             }
         }
 
         imprimirMatriz(tablero);
         System.out.println("-------------");
-        Color c1 = new Color(158, 251, 179);
-        if (indice < posicionesCirculos.length) {
-            dibujarCirculo(x, posicionesCirculos[indice], 20, c1);
+        // Color c1 = new Color(158, 251, 179);
+        if (indice < posicionesCirculos.length && indice >= 0) {
+            dibujarCirculo(x, posicionesCirculos[indice], 20, color, true);
+        }
+    }
 
+    public void dibujarCirculo(int x, int y, int radio, int color, boolean rellenos) {
+        double x1, y1;
+        for (double angulo = 0; angulo < 360; angulo += 1) {
+            x1 = radio * Math.cos(angulo * Math.PI / 180);
+            y1 = radio * Math.sin(angulo * Math.PI / 180);
+
+            int posXFinal = (int) (x + x1);
+            int posYFinal = (int) (y + y1);
+            if (x + x1 < dibujo.length &&
+                    y + y1 < dibujo[0].length &&
+                    x + x1 >= 0 && y + y1 >= 0) {
+                if (rellenos) {
+                    dibujarLinea2(x, y, posXFinal, posYFinal, color);
+                } else {
+                    dibujo[posXFinal][posYFinal] = color;
+                }
+
+            }
+        }
+    }
+
+    public void dibujarLinea2(int fI, int cI, int fF, int cF, int color) {
+        int fInicialCopia = fI < fF ? fI : fF;
+        fF = fI > fF ? fI : fF;
+        fI = fInicialCopia;
+
+        int cICopia = cI < cF ? cI : cF;
+        cF = cI > cF ? cI : cF;
+        cI = cICopia;
+
+        for (int f = fI; f < fF; f++) {
+            for (int c = cI; c < cF; c++) {
+                dibujo[f][c] = color;
+            }
         }
 
+    }
+
+    public void recargarCuadros(JFrame frame, JPanel panel, JLayeredPane layeredPane, JLabel imagenLabel, int w,
+            int h) {
+        for (int i = 0; i < w; i++) {
+            for (int j = 0; j < h; j++) {
+                imagen.setRGB(i, j, dibujo[i][j]);
+            } // for
+        }
+        imagenLabel.repaint();
+        layeredPane.repaint();
+        panel.repaint();
         frame.repaint();
+    }
+
+    public void cambioJugador() {
+        if (turno == 1) {
+            colorActual = jugador1.color;
+            id = 1;
+            turno = 2;
+        } else {
+            colorActual = jugador2.color;
+            id = 2;
+            turno = 1;
+        }
     }
 }

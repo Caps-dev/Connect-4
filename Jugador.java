@@ -1,8 +1,7 @@
-import java.awt.Color;
 
 public class Jugador {
     String nombre;
-    Color color;
+    int color;
 
     public void setNombre(String nombre) {
         this.nombre = nombre;

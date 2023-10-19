@@ -3,7 +3,8 @@ public class Main {
 
         Jugador jugador1 = new Jugador();
         Jugador jugador2 = new Jugador();
-        int[][] tablero;
+        jugador1.color = 255 * 256 * 256;
+
         Interfaz i = new Interfaz(jugador1, jugador2);
 
     }
