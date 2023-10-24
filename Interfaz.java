@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.image.BufferedImage;
 
 public class Interfaz extends JFrame implements ActionListener {
+    Juego juego = new Juego();
     public static int ANCHO = 400;
     public static int ALTO = 500;
     private BufferedImage imagen;
@@ -26,7 +27,8 @@ public class Interfaz extends JFrame implements ActionListener {
     Jugador actualJugador;
     int colorActual;
     int turno = 1;
-    int id;
+    int id = 13;
+    String nombreJugadorActual;
 
     public Interfaz(Jugador jugador1, Jugador jugador2) {
         this.jugador1 = jugador1;
@@ -48,16 +50,21 @@ public class Interfaz extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == bMenu) {
             setVisible(false);
-            // ventanaJuego(720, 680, 7, 6, jugador1, jugador2);
-            // ventanaJuego(820, 760, 8, 7);
-            ventanaJuego(920, 840, 9, 8);
+            // ventanaJuego(720, 680, 7, 6);
+            ventanaJuego(820, 760, 8, 7);
+            // ventanaJuego(920, 840, 9, 8);
         }
     }
 
     public void ventanaJuego(int w, int h, int x, int y) {
+        juego.setCantidadDeTurnos(0);
         jugador1.setNombre(pedirNombre());
+        jugador1.setColor(pedirColor());
         jugador2.setNombre(pedirNombre());
+        jugador2.setColor(pedirColor());
         imagen = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+        nombreJugadorActual = jugador1.getNombre();
+
         int[][] tablero = new int[y][x];
         int posicion = 200;
         posicionesCirculos = new int[y];
@@ -65,6 +72,7 @@ public class Interfaz extends JFrame implements ActionListener {
             posicionesCirculos[i] = posicion;
             posicion += 81;
         }
+        juego.setCantidadDeTurnos(0);
         indicePosicionB1 = posicionesCirculos.length - 1;
         indicePosicionB2 = posicionesCirculos.length - 1;
         indicePosicionB3 = posicionesCirculos.length - 1;
@@ -107,16 +115,25 @@ public class Interfaz extends JFrame implements ActionListener {
         JPanel panel = new JPanel();
         panel.setLayout(null);
         panel.setBounds(0, 0, w, 60);
+        JLabel turnosLabel = new JLabel("turno: " + juego.getCantidadDeTurnos(), JLabel.CENTER);
 
         // Agrega el JLabel al panel
         JLabel l1 = new JLabel(jugador1.getNombre(), JLabel.CENTER);
         JLabel l2 = new JLabel(jugador2.getNombre(), JLabel.CENTER);
+        colorActual = jugador1.color;
+        JLabel jugadorActual = new JLabel("Es turno de " + nombreJugadorActual, JLabel.CENTER);
+        turnosLabel.setForeground(Color.BLACK);
+        turnosLabel.setBounds(w / 2 - 80, 10, 150, 30);
         l1.setForeground(Color.getColor("j1", jugador1.color));
         l1.setBounds((int) 0, 0, 60, 30);
         l2.setForeground(Color.getColor("j2", jugador2.color));
         l2.setBounds(w - 100, 0, 60, 30);
+        jugadorActual.setForeground(Color.getColor("ja", colorActual));
+        jugadorActual.setBounds(w / 2 - 80, 0, 150, 30);
         panel.add(l2);
         panel.add(l1);
+        panel.add(jugadorActual);
+        panel.add(turnosLabel);
         JButton b1 = new JButton("1");
         JButton b2 = new JButton("2");
         JButton b3 = new JButton("3");
@@ -130,7 +147,9 @@ public class Interfaz extends JFrame implements ActionListener {
             public void actionPerformed(ActionEvent e) {
 
                 accionBoton(w, h, tablero, 60, y, 0, indicePosicionB1, colorActual, id);
-                cambioJugador();
+                jugadorActual.setForeground(Color.getColor("ja", colorActual));
+                jugadorActual.setText("Turno de " + nombreJugadorActual);
+                turnosLabel.setText("Turno: " + juego.getCantidadDeTurnos());
                 indicePosicionB1--;
                 recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
 
@@ -141,8 +160,10 @@ public class Interfaz extends JFrame implements ActionListener {
         b2.setBounds(129, 100, 60, 40);
         b2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                cambioJugador();
                 accionBoton(w, h, tablero, 160, y, 1, indicePosicionB2, colorActual, id);
+                jugadorActual.setForeground(Color.getColor("ja", colorActual));
+                jugadorActual.setText("Turno de " + nombreJugadorActual);
+                turnosLabel.setText("Turno: " + juego.getCantidadDeTurnos());
                 indicePosicionB2--;
                 recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
             }
@@ -152,11 +173,12 @@ public class Interfaz extends JFrame implements ActionListener {
         b3.setBounds(229, 100, 60, 40);
         b3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                cambioJugador();
                 accionBoton(w, h, tablero, 260, y, 2, indicePosicionB3, colorActual, id);
+                jugadorActual.setForeground(Color.getColor("ja", colorActual));
+                jugadorActual.setText("Turno de " + nombreJugadorActual);
+                turnosLabel.setText("Turno: " + juego.getCantidadDeTurnos());
                 indicePosicionB3--;
                 recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
-
             }
         });
 
@@ -165,8 +187,10 @@ public class Interfaz extends JFrame implements ActionListener {
 
         b4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                cambioJugador();
                 accionBoton(w, h, tablero, 360, y, 3, indicePosicionB4, colorActual, id);
+                jugadorActual.setForeground(Color.getColor("ja", colorActual));
+                jugadorActual.setText("Turno de " + nombreJugadorActual);
+                turnosLabel.setText("Turno: " + juego.getCantidadDeTurnos());
                 indicePosicionB4--;
                 recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
 
@@ -176,8 +200,10 @@ public class Interfaz extends JFrame implements ActionListener {
 
         b5.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                cambioJugador();
                 accionBoton(w, h, tablero, 460, y, 4, indicePosicionB5, colorActual, id);
+                jugadorActual.setForeground(Color.getColor("ja", colorActual));
+                jugadorActual.setText("Turno de " + nombreJugadorActual);
+                turnosLabel.setText("Turno: " + juego.getCantidadDeTurnos());
                 indicePosicionB5--;
                 recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
 
@@ -187,8 +213,10 @@ public class Interfaz extends JFrame implements ActionListener {
 
         b6.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                cambioJugador();
                 accionBoton(w, h, tablero, 560, y, 5, indicePosicionB6, colorActual, id);
+                jugadorActual.setForeground(Color.getColor("ja", colorActual));
+                jugadorActual.setText("Turno de " + nombreJugadorActual);
+                turnosLabel.setText("Turno: " + juego.getCantidadDeTurnos());
                 indicePosicionB6--;
                 recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
 
@@ -199,8 +227,10 @@ public class Interfaz extends JFrame implements ActionListener {
 
         b7.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                cambioJugador();
                 accionBoton(w, h, tablero, 660, y, 6, indicePosicionB7, colorActual, id);
+                jugadorActual.setForeground(Color.getColor("ja", colorActual));
+                jugadorActual.setText("Turno de " + nombreJugadorActual);
+                turnosLabel.setText("Turno: " + juego.getCantidadDeTurnos());
                 indicePosicionB7--;
                 recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
 
@@ -213,8 +243,8 @@ public class Interfaz extends JFrame implements ActionListener {
 
             b8.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    cambioJugador();
                     accionBoton(w, h, tablero, 760, y, 7, indicePosicionB8, colorActual, id);
+
                     indicePosicionB8--;
                     recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
 
@@ -230,7 +260,6 @@ public class Interfaz extends JFrame implements ActionListener {
 
             b9.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    cambioJugador();
                     accionBoton(w, h, tablero, 860, y, 8, indicePosicionB9, colorActual, id);
                     indicePosicionB9--;
                     recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
@@ -261,7 +290,7 @@ public class Interfaz extends JFrame implements ActionListener {
 
     }
 
-    public void dibujarLinea(int desdeX, int hastaX, int desdeY, int hastaY) {
+    private void dibujarLinea(int desdeX, int hastaX, int desdeY, int hastaY) {
 
         for (int i = desdeX; i < hastaX; i++) {
             for (int j = desdeY; j < hastaY; j++) {
@@ -270,7 +299,7 @@ public class Interfaz extends JFrame implements ActionListener {
         }
     }
 
-    public void imprimirMatriz(int[][] matriz) {
+    private void imprimirMatriz(int[][] matriz) {
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[i].length; j++) {
                 System.out.print(matriz[i][j] + " ");
@@ -285,22 +314,35 @@ public class Interfaz extends JFrame implements ActionListener {
     }
 
     private void accionBoton(int w, int h, int[][] tablero, int x, int y, int columna, int indice, int color, int id) {
-        for (int i = y - 1; i >= 0; i--) {
+        juego.verificarEstado(tablero, id);
+        int cantidad = 0;
+        for (int i = tablero.length - 1; i >= 0; i--) {
             if (tablero[i][columna] == 0) {
                 tablero[i][columna] = id;
                 break;
+            } else {
+                cantidad++;
             }
         }
-
-        imprimirMatriz(tablero);
-        System.out.println("-------------");
-        // Color c1 = new Color(158, 251, 179);
-        if (indice < posicionesCirculos.length && indice >= 0) {
-            dibujarCirculo(x, posicionesCirculos[indice], 20, color, true);
+        if (cantidad >= y) {
+            // System.out.println("No puede agregar mas fichas");
+            JOptionPane.showMessageDialog(null, "No puede agregar más ficha en esta columna", "Hey!",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            imprimirMatriz(tablero);
+            juego.SumarTurno();
+            System.out.println("-------------");
+            // Color c1 = new Color(158, 251, 179);
+            if (indice < posicionesCirculos.length && indice >= 0) {
+                dibujarCirculo(x, posicionesCirculos[indice], 20, color, true);
+            }
+            cambioJugador();
         }
+        juego.verificarEstado(tablero, id);
+
     }
 
-    public void dibujarCirculo(int x, int y, int radio, int color, boolean rellenos) {
+    private void dibujarCirculo(int x, int y, int radio, int color, boolean rellenos) {
         double x1, y1;
         for (double angulo = 0; angulo < 360; angulo += 1) {
             x1 = radio * Math.cos(angulo * Math.PI / 180);
@@ -321,7 +363,7 @@ public class Interfaz extends JFrame implements ActionListener {
         }
     }
 
-    public void dibujarLinea2(int fI, int cI, int fF, int cF, int color) {
+    private void dibujarLinea2(int fI, int cI, int fF, int cF, int color) {
         int fInicialCopia = fI < fF ? fI : fF;
         fF = fI > fF ? fI : fF;
         fI = fInicialCopia;
@@ -338,7 +380,7 @@ public class Interfaz extends JFrame implements ActionListener {
 
     }
 
-    public void recargarCuadros(JFrame frame, JPanel panel, JLayeredPane layeredPane, JLabel imagenLabel, int w,
+    private void recargarCuadros(JFrame frame, JPanel panel, JLayeredPane layeredPane, JLabel imagenLabel, int w,
             int h) {
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
@@ -351,15 +393,25 @@ public class Interfaz extends JFrame implements ActionListener {
         frame.repaint();
     }
 
-    public void cambioJugador() {
+    private void cambioJugador() {
         if (turno == 1) {
-            colorActual = jugador1.color;
+            colorActual = jugador2.color;
             id = 1;
             turno = 2;
+            nombreJugadorActual = jugador2.nombre;
         } else {
-            colorActual = jugador2.color;
-            id = 2;
+            colorActual = jugador1.color;
+            id = 13;
             turno = 1;
+            nombreJugadorActual = jugador1.nombre;
         }
+
+    }
+
+    private int pedirColor() {
+        Color color;
+        JColorChooser Selectorcolor = new JColorChooser();
+        color = Selectorcolor.showDialog(null, "Seleccione un Color", Color.BLUE);
+        return color.getRGB();
     }
 }

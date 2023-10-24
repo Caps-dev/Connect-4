@@ -11,4 +11,8 @@ public class Jugador {
         return nombre;
     }
 
+    public void setColor(int color) {
+        this.color = color;
+    }
+
 }
