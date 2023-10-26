@@ -2,6 +2,7 @@
 public class Jugador {
     String nombre;
     int color;
+    int id;
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -15,4 +16,11 @@ public class Jugador {
         this.color = color;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 }

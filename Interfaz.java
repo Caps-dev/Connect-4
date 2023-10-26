@@ -1,11 +1,12 @@
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import java.awt.event.*; //no hemos visto el uso de toda la libreria
 import javax.swing.*;
 
-                     //desde extends esta chiva pero creo que la idea es evitar recursos externos
+//desde extends esta chiva pero creo que la idea es evitar recursos externos
 public class Interfaz extends JFrame implements ActionListener { // intentemos usar la sintaxis que hemos visto
     Juego juego = new Juego();
     public static int ANCHO = 400;
@@ -19,7 +20,7 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
     // hasta aca
     Jugador jugador1;
     Jugador jugador2;
-    //creo que hacen falta unos comments aqui
+    // creo que hacen falta unos comments aqui
     int indicePosicionB1;
     int indicePosicionB2;
     int indicePosicionB3;
@@ -35,7 +36,6 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
     int id = 13;
     String nombreJugadorActual;
 
-
     public Interfaz(Jugador jugador1, Jugador jugador2) {
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
@@ -47,6 +47,8 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         add(lMenu);
         add(bMenu);
 
+        jugador1.setId(13);
+        jugador2.setId(1);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(ANCHO, ALTO);
         setLocationRelativeTo(null);
@@ -55,16 +57,15 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
 
         // hasta aca considero
 
-
-
     }
+
     // de aqui hasta la 300 esta confuso
     // hacen falta muchos comentarios
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == bMenu) {
             setVisible(false);
-            // ventanaJuego(720, 680, 7, 6);
-            ventanaJuego(820, 760, 8, 7);
+            ventanaJuego(720, 680, 7, 6);
+            // ventanaJuego(820, 760, 8, 7);
             // ventanaJuego(920, 840, 9, 8);
         }
     }
@@ -78,7 +79,7 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         imagen = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
         nombreJugadorActual = jugador1.getNombre();
 
-        int[][] tablero = new int[y][x];
+        Matriz tablero = new Matriz(y, x);
         int posicion = 200;
         posicionesCirculos = new int[y];
         for (int i = 0; i < y; i++) {
@@ -158,14 +159,9 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         b1.setBounds(29, 100, 60, 40);
         b1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
-                accionBoton(w, h, tablero, 60, y, 0, indicePosicionB1, colorActual, id);
-                jugadorActual.setForeground(Color.getColor("ja", colorActual));
-                jugadorActual.setText("Turno de " + nombreJugadorActual);
-                turnosLabel.setText("Turno: " + juego.getCantidadDeTurnos());
+                accionarBoton(jugadorActual, frame, tablero, w, h, 60, 0, turnosLabel, panel, layeredPane, imagenLabel,
+                        indicePosicionB1);
                 indicePosicionB1--;
-                recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
-
             }
         });
 
@@ -173,12 +169,9 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         b2.setBounds(129, 100, 60, 40);
         b2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                accionBoton(w, h, tablero, 160, y, 1, indicePosicionB2, colorActual, id);
-                jugadorActual.setForeground(Color.getColor("ja", colorActual));
-                jugadorActual.setText("Turno de " + nombreJugadorActual);
-                turnosLabel.setText("Turno: " + juego.getCantidadDeTurnos());
+                accionarBoton(jugadorActual, frame, tablero, w, h, 160, 1, turnosLabel, panel, layeredPane,
+                        imagenLabel, indicePosicionB2);
                 indicePosicionB2--;
-                recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
             }
         });
 
@@ -186,12 +179,9 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         b3.setBounds(229, 100, 60, 40);
         b3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                accionBoton(w, h, tablero, 260, y, 2, indicePosicionB3, colorActual, id);
-                jugadorActual.setForeground(Color.getColor("ja", colorActual));
-                jugadorActual.setText("Turno de " + nombreJugadorActual);
-                turnosLabel.setText("Turno: " + juego.getCantidadDeTurnos());
+                accionarBoton(jugadorActual, frame, tablero, w, h, 260, 2, turnosLabel, panel, layeredPane,
+                        imagenLabel, indicePosicionB3);
                 indicePosicionB3--;
-                recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
             }
         });
 
@@ -200,12 +190,9 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
 
         b4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                accionBoton(w, h, tablero, 360, y, 3, indicePosicionB4, colorActual, id);
-                jugadorActual.setForeground(Color.getColor("ja", colorActual));
-                jugadorActual.setText("Turno de " + nombreJugadorActual);
-                turnosLabel.setText("Turno: " + juego.getCantidadDeTurnos());
+                accionarBoton(jugadorActual, frame, tablero, w, h, 360, 3, turnosLabel, panel, layeredPane,
+                        imagenLabel, indicePosicionB4);
                 indicePosicionB4--;
-                recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
 
             }
         });
@@ -213,12 +200,9 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
 
         b5.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                accionBoton(w, h, tablero, 460, y, 4, indicePosicionB5, colorActual, id);
-                jugadorActual.setForeground(Color.getColor("ja", colorActual));
-                jugadorActual.setText("Turno de " + nombreJugadorActual);
-                turnosLabel.setText("Turno: " + juego.getCantidadDeTurnos());
+                accionarBoton(jugadorActual, frame, tablero, w, h, 460, 4, turnosLabel, panel, layeredPane,
+                        imagenLabel, indicePosicionB5);
                 indicePosicionB5--;
-                recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
 
             }
         });
@@ -226,12 +210,9 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
 
         b6.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                accionBoton(w, h, tablero, 560, y, 5, indicePosicionB6, colorActual, id);
-                jugadorActual.setForeground(Color.getColor("ja", colorActual));
-                jugadorActual.setText("Turno de " + nombreJugadorActual);
-                turnosLabel.setText("Turno: " + juego.getCantidadDeTurnos());
+                accionarBoton(jugadorActual, frame, tablero, w, h, 560, 5, turnosLabel, panel, layeredPane,
+                        imagenLabel, indicePosicionB6);
                 indicePosicionB6--;
-                recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
 
             }
         });
@@ -240,12 +221,9 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
 
         b7.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                accionBoton(w, h, tablero, 660, y, 6, indicePosicionB7, colorActual, id);
-                jugadorActual.setForeground(Color.getColor("ja", colorActual));
-                jugadorActual.setText("Turno de " + nombreJugadorActual);
-                turnosLabel.setText("Turno: " + juego.getCantidadDeTurnos());
+                accionarBoton(jugadorActual, frame, tablero, w, h, 660, 6, turnosLabel, panel, layeredPane,
+                        imagenLabel, indicePosicionB7);
                 indicePosicionB7--;
-                recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
 
             }
         });
@@ -256,10 +234,9 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
 
             b8.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    accionBoton(w, h, tablero, 760, y, 7, indicePosicionB8, colorActual, id);
-
+                    accionarBoton(jugadorActual, frame, tablero, w, h, 760, 7, turnosLabel, panel, layeredPane,
+                            imagenLabel, indicePosicionB8);
                     indicePosicionB8--;
-                    recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
 
                 }
             });
@@ -273,9 +250,9 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
 
             b9.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    accionBoton(w, h, tablero, 860, y, 8, indicePosicionB9, colorActual, id);
+                    accionarBoton(jugadorActual, frame, tablero, w, h, 860, 7, turnosLabel, panel, layeredPane,
+                            imagenLabel, indicePosicionB9);
                     indicePosicionB9--;
-                    recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
 
                 }
             });
@@ -289,7 +266,6 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         frame.add(b5);
         frame.add(b6);
         frame.add(b7);
-
 
         // Agrega el panel a una capa superior
         layeredPane.add(panel, JLayeredPane.PALETTE_LAYER);
@@ -332,38 +308,21 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
 
     }
 
-    // esto deberia ir en la clase juego
-    private void imprimirMatriz(int[][] matriz) {
-        for (int i = 0; i < matriz.length; i++) {
-            for (int j = 0; j < matriz[i].length; j++) {
-                System.out.print(matriz[i][j] + " ");
-            }
-            System.out.println(); // Nueva línea para cada fila
-        }
-    }
-
     public String pedirNombre() {
         String nombre = JOptionPane.showInputDialog("digite su nombre");
         return nombre;
     }
 
-    private void accionBoton(int w, int h, int[][] tablero, int x, int y, int columna, int indice, int color, int id) {
-        juego.verificarEstado(tablero, id);
-        int cantidad = 0;
-        for (int i = tablero.length - 1; i >= 0; i--) {
-            if (tablero[i][columna] == 0) {
-                tablero[i][columna] = id;
-                break;
-            } else {
-                cantidad++;
-            }
-        }
-        if (cantidad >= y) {
+    private int juegoBoton(int w, int h, Matriz tablero, int x, int columna, int indice, int color, int id) {
+        juego.verificarGanador(tablero, jugador1.getId(), jugador2.getId());
+        int status = tablero.agregarFicha(columna, id);
+
+        if (status == -1) {
             // System.out.println("No puede agregar mas fichas");
             JOptionPane.showMessageDialog(null, "No puede agregar más ficha en esta columna", "Hey!",
                     JOptionPane.ERROR_MESSAGE);
         } else {
-            imprimirMatriz(tablero);
+            tablero.imprimir();
             juego.SumarTurno();
             System.out.println("-------------");
             // Color c1 = new Color(158, 251, 179);
@@ -372,8 +331,7 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
             }
             cambioJugador();
         }
-        juego.verificarEstado(tablero, id);
-
+        return juego.verificarGanador(tablero, jugador1.getId(), jugador2.getId());
     }
 
     private void dibujarCirculo(int x, int y, int radio, int color, boolean rellenos) {
@@ -396,6 +354,7 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
             }
         }
     }
+
     // por que hay dibujarlinea1 y dibujarlinea2?
     private void dibujarLinea2(int fI, int cI, int fF, int cF, int color) {
         int fInicialCopia = fI < fF ? fI : fF;
@@ -427,13 +386,36 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         frame.repaint();
     }
 
-
-
-    // esto esta bonito pero preferiria hacerlo hardcoded por simplicidad y eliminar librerias
+    // esto esta bonito pero preferiria hacerlo hardcoded por simplicidad y eliminar
+    // librerias
     private int pedirColor() {
         Color color;
         JColorChooser Selectorcolor = new JColorChooser();
         color = Selectorcolor.showDialog(null, "Seleccione un Color", Color.BLUE);
         return color.getRGB();
+    }
+
+    private void accionarBoton(JLabel jugadorActual, JFrame frame, Matriz tablero, int w, int h, int x, int columna,
+            JLabel turnosLabel, JPanel panel, JLayeredPane layeredPane, JLabel imagenLabel, int indice) {
+        ImageIcon imageIcon = new ImageIcon(
+                new ImageIcon("images/celebracion.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+
+        int gano = 0;
+        gano = juegoBoton(w, h, tablero, x, columna, indice, colorActual, id);
+        recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
+        if (gano == 2) {
+            JOptionPane.showMessageDialog(null,
+                    "El ganador fue: " + ((id != jugador1.getId()) ? jugador1.getNombre() : jugador2.getNombre()),
+                    "Hey!",
+                    JOptionPane.INFORMATION_MESSAGE, imageIcon);
+            frame.setVisible(false);
+            setVisible(true);
+            return;
+        }
+        jugadorActual.setForeground(Color.getColor("ja", colorActual));
+        jugadorActual.setText("Turno de " + nombreJugadorActual);
+        turnosLabel.setText("Turno: " + juego.getCantidadDeTurnos());
+        recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
+
     }
 }
