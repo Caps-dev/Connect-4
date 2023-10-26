@@ -1,20 +1,25 @@
 
 import java.awt.Color;
-import java.awt.event.*;
-import javax.swing.*;
 import java.awt.image.BufferedImage;
 
-public class Interfaz extends JFrame implements ActionListener {
+import java.awt.event.*; //no hemos visto el uso de toda la libreria
+import javax.swing.*;
+
+                     //desde extends esta chiva pero creo que la idea es evitar recursos externos
+public class Interfaz extends JFrame implements ActionListener { // intentemos usar la sintaxis que hemos visto
     Juego juego = new Juego();
     public static int ANCHO = 400;
     public static int ALTO = 500;
     private BufferedImage imagen;
     private int[][] dibujo = null;
     private int[] posicionesCirculos;
+    // creo que esto podriamos cambiarlo a como lo vimos en clase
     JButton bMenu = new JButton("Juegar Cuatro en raya");
     JLabel lMenu = new JLabel("Prueba de menu");
+    // hasta aca
     Jugador jugador1;
     Jugador jugador2;
+    //creo que hacen falta unos comments aqui
     int indicePosicionB1;
     int indicePosicionB2;
     int indicePosicionB3;
@@ -30,9 +35,12 @@ public class Interfaz extends JFrame implements ActionListener {
     int id = 13;
     String nombreJugadorActual;
 
+
     public Interfaz(Jugador jugador1, Jugador jugador2) {
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
+
+        // cambiar esto por un menu corriente
         bMenu.setBounds(100, 170, 200, 40);
         lMenu.setBounds(150, 10, 200, 40);
         bMenu.addActionListener(this);
@@ -45,8 +53,13 @@ public class Interfaz extends JFrame implements ActionListener {
         setLayout(null);
         setVisible(true);
 
-    }
+        // hasta aca considero
 
+
+
+    }
+    // de aqui hasta la 300 esta confuso
+    // hacen falta muchos comentarios
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == bMenu) {
             setVisible(false);
@@ -277,6 +290,7 @@ public class Interfaz extends JFrame implements ActionListener {
         frame.add(b6);
         frame.add(b7);
 
+
         // Agrega el panel a una capa superior
         layeredPane.add(panel, JLayeredPane.PALETTE_LAYER);
 
@@ -290,6 +304,9 @@ public class Interfaz extends JFrame implements ActionListener {
 
     }
 
+    // hasta aqui es bastante dificil de entender
+    /////////////////////////////
+
     private void dibujarLinea(int desdeX, int hastaX, int desdeY, int hastaY) {
 
         for (int i = desdeX; i < hastaX; i++) {
@@ -299,6 +316,23 @@ public class Interfaz extends JFrame implements ActionListener {
         }
     }
 
+    // esto deberia en la clase juego
+    private void cambioJugador() {
+        if (turno == 1) {
+            colorActual = jugador2.color;
+            id = 1;
+            turno = 2;
+            nombreJugadorActual = jugador2.nombre;
+        } else {
+            colorActual = jugador1.color;
+            id = 13;
+            turno = 1;
+            nombreJugadorActual = jugador1.nombre;
+        }
+
+    }
+
+    // esto deberia ir en la clase juego
     private void imprimirMatriz(int[][] matriz) {
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[i].length; j++) {
@@ -362,7 +396,7 @@ public class Interfaz extends JFrame implements ActionListener {
             }
         }
     }
-
+    // por que hay dibujarlinea1 y dibujarlinea2?
     private void dibujarLinea2(int fI, int cI, int fF, int cF, int color) {
         int fInicialCopia = fI < fF ? fI : fF;
         fF = fI > fF ? fI : fF;
@@ -393,21 +427,9 @@ public class Interfaz extends JFrame implements ActionListener {
         frame.repaint();
     }
 
-    private void cambioJugador() {
-        if (turno == 1) {
-            colorActual = jugador2.color;
-            id = 1;
-            turno = 2;
-            nombreJugadorActual = jugador2.nombre;
-        } else {
-            colorActual = jugador1.color;
-            id = 13;
-            turno = 1;
-            nombreJugadorActual = jugador1.nombre;
-        }
 
-    }
 
+    // esto esta bonito pero preferiria hacerlo hardcoded por simplicidad y eliminar librerias
     private int pedirColor() {
         Color color;
         JColorChooser Selectorcolor = new JColorChooser();

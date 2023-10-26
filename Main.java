@@ -1,5 +1,5 @@
-import javax.swing.*;
-import javax.swing.plaf.ColorChooserUI;
+import javax.swing.*; // no deberiamos llamar a toda la libreria
+// import javax.swing.plaf.ColorChooserUI; // no hemos visto esto
 import java.awt.Color;
 
 public class Main {
@@ -7,37 +7,26 @@ public class Main {
 
         Jugador jugador1 = new Jugador();
         Jugador jugador2 = new Jugador();
+        Juego juego = new Juego();
+        Matriz matriz = new Matriz(5,5);
+        matriz.imprimir();
+        matriz.agregarFicha(0,14);
+        matriz.agregarFicha(1,14);
+        matriz.agregarFicha(2,14);
 
-        // Juego juego = new Juego();
+        //matriz.imprimir();
+        System.out.println(juego.getEsActivo());
+        System.out.println(juego.getEsActivo());
 
-        // int [][] prueba = juego.generarMatriz(5,5);
-        // int a = 0;
-        // juego.imprimir(prueba);
-        // a = juego.agregarFicha(prueba,0,1);
-        // a = juego.agregarFicha(prueba,1,1);
-        // a = juego.agregarFicha(prueba,2,1);
-        // a = juego.agregarFicha(prueba,3,1);
-        // a = juego.agregarFicha(prueba,4,1);
 
-        // a = juego.agregarFicha(prueba,2,13);
-        // a = juego.agregarFicha(prueba,2,13);
-        // a = juego.agregarFicha(prueba,2,13);
-        // a = juego.agregarFicha(prueba,2,13);
+        while(juego.getEsActivo()==1){
+            System.out.println("Inicio de ciclo");
+            juego.verificarGanador(matriz,1,14); // el estado cambia hasta verificar el tablero
+            matriz.agregarFicha(3,14); // lo meto aqui como demostracion de que el ciclo corre dos veces
+            matriz.agregarFicha(4,14);
+        }
 
-        // juego.imprimir(prueba);
-        // //a = juego.agregarFicha(prueba,1,1);
-
-        // //juego.verificarVertical(prueba,1);
-        // //juego.verificarHorizontal(prueba,1);
-        // juego.verificarEstado(prueba,1);
-        // juego.verificarEstado(prueba,13);
-
-        // juego.verificarVertical(prueba,13);
-
-        // juego.agregarFicha(prueba,1,10);
-        // juego.agregarFicha(prueba,1,10);
-
-        Interfaz i = new Interfaz(jugador1, jugador2);
+        // Interfaz i = new Interfaz(jugador1, jugador2);
 
     }
 }
