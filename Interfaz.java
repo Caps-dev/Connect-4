@@ -84,10 +84,10 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
 
     public void ventanaJuego(int w, int h, int x, int y) {
         juego.setCantidadDeTurnos(0);
-        jugador1.setNombre(pedirNombre());
-        jugador1.setColor(pedirColor());
-        jugador2.setNombre(pedirNombre());
-        jugador2.setColor(pedirColor());
+        jugador1.setNombre(pedirNombre("jugador 1")); //valores default por si no hay escogencia
+        jugador1.setColor(pedirColor(-16776961)); // ibid
+        jugador2.setNombre(pedirNombre("jugador 2")); // ibid
+        jugador2.setColor(pedirColor(-65536)); //ibid
         imagen = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
         nombreJugadorActual = jugador1.getNombre();
 
@@ -320,8 +320,11 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
 
     }
 
-    public String pedirNombre() {
+    public String pedirNombre(String nombreDefault) {
         String nombre = JOptionPane.showInputDialog("digite su nombre");
+        if (nombre==null){
+            nombre = nombreDefault;
+        }
         return nombre;
     }
 
@@ -400,11 +403,18 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
 
     // esto esta bonito pero preferiria hacerlo hardcoded por simplicidad y eliminar
     // librerias
-    private int pedirColor() {
+    private int pedirColor(int colorDefault) {
         Color color;
+        int colorRGB = 0;
         JColorChooser Selectorcolor = new JColorChooser();
-        color = Selectorcolor.showDialog(null, "Seleccione un Color", Color.BLUE);
-        return color.getRGB();
+        try{
+            color = Selectorcolor.showDialog(null, "Seleccione un Color", Color.BLUE);    
+            colorRGB = color.getRGB();
+        } catch(Exception e){
+            colorRGB = colorDefault;
+        }
+        
+        return colorRGB;
     }
 
     private void accionarBoton(JLabel jugadorActual, JFrame frame, Matriz tablero, int w, int h, int x, int columna,
