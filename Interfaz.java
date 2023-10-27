@@ -322,7 +322,7 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
 
     public String pedirNombre(String nombreDefault) {
         String nombre = JOptionPane.showInputDialog("digite su nombre");
-        if (nombre==null){
+        if (nombre==null||nombre.equals("") ){
             nombre = nombreDefault;
         }
         return nombre;
