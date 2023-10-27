@@ -10,6 +10,7 @@ public class Main {
         // Juego juego = new Juego();
         // Matriz matriz = new Matriz(5,5);
         // matriz.imprimir();
+        
         // matriz.agregarFicha(0,14);
         // matriz.agregarFicha(1,14);
         // matriz.agregarFicha(2,14);

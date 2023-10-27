@@ -20,6 +20,7 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
     // hasta aca
     Jugador jugador1;
     Jugador jugador2;
+    String tableroEscogido;
     // creo que hacen falta unos comments aqui
     int indicePosicionB1;
     int indicePosicionB2;
@@ -47,6 +48,13 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         add(lMenu);
         add(bMenu);
 
+        String[] tableros = {"6x7","7x8","8x9"};
+        
+        tableroEscogido = String.valueOf(JOptionPane.showInputDialog(null, "seleccione un tamanio de tablero", "Tamanio",
+            JOptionPane.QUESTION_MESSAGE, null, tableros, tableros[0]));
+        System.out.println(tableroEscogido);
+
+
         jugador1.setId(13);
         jugador2.setId(1);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,14 +67,18 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
 
     }
 
-    // de aqui hasta la 300 esta confuso
-    // hacen falta muchos comentarios
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == bMenu) {
             setVisible(false);
-            ventanaJuego(720, 680, 7, 6);
-            // ventanaJuego(820, 760, 8, 7);
-            // ventanaJuego(920, 840, 9, 8);
+
+            if (tableroEscogido=="6x7"){
+                ventanaJuego(720, 680, 7, 6);
+            } else if (tableroEscogido=="7x8"){
+                ventanaJuego(820, 760, 8, 7);    
+            } else{
+                ventanaJuego(920, 840, 9, 8);
+            }
+
         }
     }
 
