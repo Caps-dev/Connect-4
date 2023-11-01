@@ -1,5 +1,5 @@
 import javax.swing.*; // no deberiamos llamar a toda la libreria
-// import javax.swing.plaf.ColorChooserUI; // no hemos visto esto
+import javax.swing.plaf.ColorChooserUI; // no hemos visto esto
 import java.awt.Color;
 
 public class Main {
@@ -7,29 +7,21 @@ public class Main {
 
         Jugador jugador1 = new Jugador();
         Jugador jugador2 = new Jugador();
-        //Matriz tablero = new Matriz(1, 8);
-
-        // Juego juego = new Juego();
-        // Matriz matriz = new Matriz(5,5);
-        // matriz.imprimir();
+        Matriz tablero = new Matriz(9, 9); // esta es la unica forma que encontre de calmar los errores
+        //Juego juego = new Juego();
+ /*
         
-        // matriz.agregarFicha(0,14);
-        // matriz.agregarFicha(1,14);
-        // matriz.agregarFicha(2,14);
-
-       // tablero.imprimir();
-        // System.out.println(juego.getEsActivo());
-        // System.out.println(juego.getEsActivo());
-
-        // while(juego.getEsActivo()==1){
-        // System.out.println("Inicio de ciclo");
-        // juego.verificarGanador(matriz,1,14); // el estado cambia hasta verificar el
-        // tablero
-        // matriz.agregarFicha(3,14); // lo meto aqui como demostracion de que el ciclo
-        // corre dos veces
-        // matriz.agregarFicha(4,14);
-        // }
-
+       
+        Matriz matriz = new Matriz(1,4);
+        matriz.imprimir();
+        matriz.agregarFicha(0,14);
+        matriz.agregarFicha(1,1);
+        matriz.agregarFicha(2,1);
+        matriz.agregarFicha(3,14);
+       
+        //System.out.println(matriz.hayEspacio());
+        juego.verificarGanador(matriz,1,14);
+ */
         Interfaz i = new Interfaz(jugador1, jugador2);
 
     }
