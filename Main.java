@@ -11,7 +11,7 @@ public class Main {
          * 
          * Matriz matriz = new Matriz(1,4);
          * matriz.imprimir();
-         * matriz.agregarFicha(0,14);
+          * matriz.agregarFicha(0,14);
          * matriz.agregarFicha(1,1);
          * matriz.agregarFicha(2,1);
          * matriz.agregarFicha(3,14);

@@ -127,88 +127,80 @@ public class Matriz {
 		return status;
 	}
 
-	public int verificarDiagonal(int id, int fila, int columna, int dF, int dC,
-			int cantidad, int contador) {
-		// implementacion recursiva
-		int status = 0;
+	public int verificarDiagonal(int id, int fila, int columna, int dF, int dC, int cantidad) {
+	    int status = 0;
+	    int suma = 1;
+	    int resultado = 1;
+	    
 
-		/*
-		 * System.out.println("verificando id : " + id);
-		 * System.out.println("valor en matriz : " + matriz[dF][dC]);
-		 * System.out.println("fila actual:" + dF + " , columna actual: " + dC);
-		 * System.out.println("contador actual:  " + contador);
-		 */
+	    if (fila < matriz.length && columna < matriz[0].length && fila >= 0 && columna >= 0) {
+	        if (id == matriz[fila][columna]) {
+	            resultado += verificarDiagonal(id, fila + dF, columna + dC, dF, dC, cantidad);
+	        }
+	    } else{
+	    	resultado = 1;
+	    }
+	    return resultado;
+	}
 
-		if (contador >= cantidad) { // fin de la recursion
-			status = 1;
-		} else {
-			int nF = fila + dF; // nueva fila
-			int nC = columna + dC; // nueva columna
-			if (nF >= 0 && nC >= 0 && nF < matriz.length && nC < matriz[nF].length) {
-				if (id == matriz[nF][nC]) {
-					status = verificarDiagonal(id, nF, nC, dF, dC, cantidad, contador + 1);
-				}
-			}
-		}
-		if (contador >= cantidad) {
-			status = 3;
-		}
+
+
+	public int verificarDiagonales(int id, int fila, int columna){
+
+		int status = -1;
+
+	    int arribaDerecha = verificarDiagonal(id, fila, columna, -1, 1,4) -1 ; //hacia arriba y la derecha
+	    int abajoIzquierda = verificarDiagonal(id, fila, columna, 1, -1,4) -1  ; //hacia arriba y la derecha
+	    int diagonalInversa = arribaDerecha+ abajoIzquierda-1 ;
+
+	    /// int EJEMPLO = verificarDiagonal(id, fila, columna, dF, dC,SUMA) ; //ejemplo
+	    int arribaIzquierda = verificarDiagonal(id, fila, columna, -1, -1,4) -1 ; //hacia arriba y la derecha
+	    int abajoDerecha = verificarDiagonal(id, fila, columna, 1, 1,4) -1 ; //hacia arriba y la derecha
+	    int diagonal = arribaIzquierda + abajoDerecha -1;
+	   /*
+	    System.out.println("---------------------------------");
+	    System.out.println("coordenadas " + fila + " , " + columna);
+	    System.out.println("Valor de la entrada " + matriz[fila][columna]);
+	    System.out.println("SUMA arribaDerecha" + arribaDerecha);
+	    System.out.println("SUMA abajoIzquierda" + abajoIzquierda);
+	    System.out.println("SUMA TOTAL DIAGONAL INVERSA " + diagonalInversa);
+	    System.out.println("---------------------------------");
+
+		System.out.println("---------------------------------");
+	    System.out.println("SUMA arribaIzquierda" + arribaIzquierda);
+	    System.out.println("SUMA abajoDerecha" + abajoDerecha);
+	    System.out.println("SUMA TOTAL DIAGONAL regular " + diagonalInversa);
+	    System.out.println("---------------------------------");
+
+	*/
+	    if (diagonalInversa>=4 || diagonal >=4){
+	    	status = 4;
+	    }
 
 		return status;
+
+
+
 	}
+
+
 
 	public int verificarEstado(int id) {
 		int estado = -1;
 
+
 		estado = verificarVertical(id);
 		if (estado == -1) {
 			estado = verificarHorizontal(id);
-		}
+		} 
 
 		if (estado == -1) {
 			System.out.println("verificando diagonal------------------------------------");
 
-			int diagonalDerechaAbajo = verificarDiagonal(id, fila, columna, 1, 1, 4, 1);
-			int diagonalIzquierdaAbajo = verificarDiagonal(id, fila, columna, 1, -1, 4, 1);
-			int diagonalDerechaArriba = verificarDiagonal(id, fila, columna, -1, 1, 4, 1);
-			int diagonalIzquierdaArriba = verificarDiagonal(id, fila, columna, -1, -1, 4, 1);
-			/*
-			 * System.out.println("diagonalDerechaAbajo ");
-			 * System.out.println("diagonalDerechaAbajo "+ diagonalDerechaAbajo);
-			 * System.out.println(" ");
-			 * 
-			 * 
-			 * 
-			 * System.out.println("diagonalIzquierdaArriba ");
-			 * System.out.println("diagonalIzquierdaArriba "+ diagonalIzquierdaArriba);
-			 * System.out.println(" ");
-			 * 
-			 * 
-			 * 
-			 * System.out.println("diagonalDerechaArriba ");
-			 * System.out.println("diagonalDerechaArriba "+ diagonalDerechaArriba);
-			 * System.out.println(" ");
-			 */
-
-			/*
-			 * 
-			 * System.out.println("diagonalIzquierdaAbajo ");
-			 * System.out.println("diagonalIzquierdaAbajo "+ diagonalIzquierdaAbajo);
-			 * System.out.println(" ");
-			 * System.out.println("-------------------------------------------- ");
-			 * 
-			 */
-
-			if (diagonalIzquierdaAbajo == 3 || diagonalDerechaAbajo == 3 || diagonalDerechaArriba == 3
-					|| diagonalIzquierdaArriba == 3) {
-				estado = 4; // El jugador ha ganado en alguna de las diagonales
-			} else {
-				estado = -1; // El jugador no ha ganado en ninguna diagonal
-			}
+			estado = verificarDiagonales(id,fila, columna);
 		}
 
-		if (estado == -1) {
-			// System.out.println("verificando si hay espacio");
+		if (estado == -1){
 			estado = hayEspacio();
 
 		}
