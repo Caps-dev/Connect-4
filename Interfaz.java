@@ -13,8 +13,10 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
     private BufferedImage imagen;
     private int[][] dibujo = null;
     private int[] posicionesCirculos;
+    Ranking ranking = new Ranking();
     // creo que esto podriamos cambiarlo a como lo vimos en clase
     JButton bMenu = new JButton("Jugar Cuatro en raya");
+    JButton bRanking = new JButton("Ver ranking");
     JLabel lMenu = new JLabel("Menu");
     // hasta aca
     Jugador jugador1;
@@ -32,7 +34,7 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
     int indicePosicionB9;
     Jugador actualJugador;
     int colorActual;
-    int turno= 1; // valor inicial
+    int turno = 1; // valor inicial
     int id = 13;
     String nombreJugadorActual;
 
@@ -42,18 +44,15 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
 
         // cambiar esto por un menu corriente
         bMenu.setBounds(100, 170, 200, 40);
-        lMenu.setBounds(150, 10, 200, 40);
+        bRanking.setBounds(100, 230, 200, 40);
+        lMenu.setBounds(175, 10, 200, 40);
         bMenu.addActionListener(this);
+        bRanking.addActionListener(this);
         add(lMenu);
         add(bMenu);
-
-        String[] tableros = {"6x7","7x8","8x9"};
-        
-        tableroEscogido = String.valueOf(JOptionPane.showInputDialog(null, "seleccione un tamanio de tablero", "Tamanio",
-            JOptionPane.QUESTION_MESSAGE, null, tableros, tableros[0]));
+        add(bRanking);
 
         System.out.println(tableroEscogido);
-
 
         jugador1.setId(13);
         jugador2.setId(1);
@@ -68,22 +67,32 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == bMenu) {
             setVisible(false);
+            String[] tableros = { "6x7", "7x8", "8x9" };
 
-            if (tableroEscogido=="8x9"){
+            tableroEscogido = String
+                    .valueOf(JOptionPane.showInputDialog(null, "seleccione un tamanio de tablero", "Tamanio",
+                            JOptionPane.QUESTION_MESSAGE, null, tableros, tableros[0]));
+
+            if (tableroEscogido == "8x9") {
                 ventanaJuego(920, 840, 9, 8);
-            } else if (tableroEscogido=="7x8"){
-                ventanaJuego(820, 760, 8, 7);    
+            } else if (tableroEscogido == "7x8") {
+                ventanaJuego(820, 760, 8, 7);
             } else { // poniendo el tablero 6x7 como default
                 ventanaJuego(720, 680, 7, 6);
-            } 
+            }
 
-
+        }
+        if (e.getSource() == bRanking) {
+            JOptionPane.showMessageDialog(null,
+                    ranking.obtenerContenidoRanking(),
+                    "Ranking",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
     public void ventanaJuego(int w, int h, int x, int y) {
         juego.setCantidadDeTurnos(0);
-        jugador1.setNombre(pedirNombre("jugador 1")); //valores default por si no hay escogencia
+        jugador1.setNombre(pedirNombre("jugador 1")); // valores default por si no hay escogencia
         jugador1.setColor(pedirColor(-16776961)); // solo busque el codigo de color del rojo
         jugador2.setNombre(pedirNombre("jugador 2")); // ibid
         jugador2.setColor(pedirColor(-65536)); // solo busque el codigo de color del azul
@@ -98,7 +107,7 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
             posicion += 81;
         }
         juego.setCantidadDeTurnos(0);
-        turno= 1; // el error esta aqui
+        turno = 1; // el error esta aqui
         indicePosicionB1 = posicionesCirculos.length - 1;
         indicePosicionB2 = posicionesCirculos.length - 1;
         indicePosicionB3 = posicionesCirculos.length - 1;
@@ -295,6 +304,7 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         frame.revalidate();
 
     }
+
     private void dibujarLinea(int desdeX, int hastaX, int desdeY, int hastaY) {
 
         for (int i = desdeX; i < hastaX; i++) {
@@ -322,7 +332,7 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
 
     public String pedirNombre(String nombreDefault) {
         String nombre = JOptionPane.showInputDialog("digite su nombre");
-        if (nombre==null||nombre.equals("") ){
+        if (nombre == null || nombre.equals("")) {
             nombre = nombreDefault;
         }
         return nombre;
@@ -404,13 +414,13 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         Color color;
         int colorRGB = 0;
         JColorChooser Selectorcolor = new JColorChooser();
-        try{
-            color = Selectorcolor.showDialog(null, "Seleccione un Color", Color.BLUE);    
+        try {
+            color = Selectorcolor.showDialog(null, "Seleccione un Color", Color.BLUE);
             colorRGB = color.getRGB();
-        } catch(Exception e){
+        } catch (Exception e) {
             colorRGB = colorDefault;
         }
-        
+
         return colorRGB;
     }
 
@@ -427,24 +437,25 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
                     "El ganador fue: " + ((id != jugador1.getId()) ? jugador1.getNombre() : jugador2.getNombre()),
                     "Hey!",
                     JOptionPane.INFORMATION_MESSAGE, imageIcon);
+            ranking.actualizarRanking((id != jugador1.getId()) ? jugador1.getNombre() : jugador2.getNombre(),
+                    juego.getCantidadDeTurnos());
+            ranking.ordenarRanking();
             frame.setVisible(false);
             setVisible(true);
-            turno= 1; // nuevo
+            turno = 1; // nuevo
             return;
         }
-        if (gano==9){
+        if (gano == 9) {
             JOptionPane.showMessageDialog(null,
                     "Hubo un empate al turno : " + juego.getCantidadDeTurnos(),
                     "Hey!",
                     JOptionPane.INFORMATION_MESSAGE, imageIcon);
             frame.setVisible(false);
             setVisible(true);
-            turno= 1; // nuevo
+            turno = 1; // nuevo
             return;
 
         }
-
-
 
         jugadorActual.setForeground(Color.getColor("ja", colorActual));
         jugadorActual.setText("Turno de " + nombreJugadorActual);
