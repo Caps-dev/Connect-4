@@ -1,5 +1,5 @@
 public class Matriz {
-		// test 2
+
 	private int columna = 0; // por si quisieramos definirlo como negativo despues o algo
 	private int fila = 0;
 	private int vacio = 0; // por si quisieramos definirlo como negativo despues o algo
@@ -49,18 +49,21 @@ public class Matriz {
 		return status;
 	}
 
-	public int verificarVertical(int id) { // todo: decir las coordenadas con las que gano
-		// System.out.println("Verificando Verticalmente"); // dev purposes
+	public int verificarVertical(int id) { 
+		
 		int status = -1; // estado por defecto
 		int suma = 0; // condicion para ganar
 
 		for (int c = matriz[0].length - 1; c >= 0; c--) {// Iterando por las columnas
-			// System.out.println("Iteracion de C:" + c);
+			System.out.println("Iteracion de C:" + c);
+			suma = 0; // resetea el contador
 
 			for (int f = matriz.length - 1; f >= 0; f--) { // itera por filas
 
 				if (matriz[f][c] == id) {
 					suma += id;
+					System.out.println("suma:" + suma);
+
 				} else {
 					suma = 0; // resetea el contador
 				}
@@ -69,6 +72,7 @@ public class Matriz {
 					status = 1;
 					f = -1;
 					c = -1;
+					System.out.println("gana verticalmente");
 				}
 				// System.out.println("F:" + f + "\tC:" + c);
 			}
@@ -94,9 +98,11 @@ public class Matriz {
 				}
 
 				if (suma >= id * 4) {
-					status = 1;
+					status = 2;
 					c = -1;
 					f = -1;
+					System.out.println("gana horizontalmente");
+
 				}
 				// System.out.println("F:" + f + "\tC:" + c);
 
@@ -121,7 +127,9 @@ public class Matriz {
 			}
 		}
 		if (contador == cantidad) {
-			status = 1;
+			status = 3;
+			System.out.println("gana diagonal");
+
 		}
 
 		return status;
@@ -131,21 +139,24 @@ public class Matriz {
 		int estado = -1;
 
 		// Verificar vertical y horizontal
+		//System.out.println("Verificando vertical");
 		estado = verificarVertical(id);
 		if (estado == -1) {
+			//System.out.println("verificando horizontal");
 			estado = verificarHorizontal(id);
-		}
+		} 
 
-		// Verificar diagonales (izquierda y derecha)
 		if (estado == -1) {
+			System.out.println("verificando diagonal");
+
 			int diagonalIzquierdaAbajo = verificarDiagonal(id, fila, columna, 1, -1, 4, 1);
 			int diagonalDerechaAbajo = verificarDiagonal(id, fila, columna, 1, 1, 4, 1);
 			int diagonalDerechaArriba = verificarDiagonal(id, fila, columna, -1, 1, 4, 1);
 			int diagonalIzquierdaArriba = verificarDiagonal(id, fila, columna, -1, -1, 4, 1);
 
-			if (diagonalIzquierdaAbajo == 1 || diagonalDerechaAbajo == 1 || diagonalDerechaArriba == 1
-					|| diagonalIzquierdaArriba == 1) {
-				estado = 1; // El jugador ha ganado en alguna de las diagonales
+			if (diagonalIzquierdaAbajo == 3 || diagonalDerechaAbajo == 3 || diagonalDerechaArriba == 3
+					|| diagonalIzquierdaArriba == 3) {
+				estado = 4; // El jugador ha ganado en alguna de las diagonales
 			} else {
 				estado = -1; // El jugador no ha ganado en ninguna diagonal
 			}

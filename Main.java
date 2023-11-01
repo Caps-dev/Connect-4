@@ -7,6 +7,8 @@ public class Main {
 
         Jugador jugador1 = new Jugador();
         Jugador jugador2 = new Jugador();
+        //Matriz tablero = new Matriz(1, 8);
+
         // Juego juego = new Juego();
         // Matriz matriz = new Matriz(5,5);
         // matriz.imprimir();
@@ -15,7 +17,7 @@ public class Main {
         // matriz.agregarFicha(1,14);
         // matriz.agregarFicha(2,14);
 
-        // //matriz.imprimir();
+       // tablero.imprimir();
         // System.out.println(juego.getEsActivo());
         // System.out.println(juego.getEsActivo());
 

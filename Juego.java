@@ -36,12 +36,17 @@ public class Juego {
 
 	public int verificarGanador(Matriz matriz, int idJ1, int idJ2) {
 		int estado = -1;
+		int estadoJ1 = matriz.verificarEstado(idJ1);
+		int estadoJ2 = matriz.verificarEstado(idJ2);
+		System.out.println("Estado Jugador 1:" + estadoJ1);
+		System.out.println("Estado Jugador 2:" + estadoJ2);
 
-		if (matriz.verificarEstado(idJ1) == 1) {
+
+		if (estadoJ1!= -1) {
 			System.out.println("Gana Jugador " + idJ1);
 			estado = 2;
 			esActivo = -1;
-		} else if (matriz.verificarEstado(idJ2) == 1) {
+		} else if (estadoJ2 != -1) {
 			estado = 2;
 			esActivo = -1;
 			System.out.println("Gana Jugador " + idJ2);

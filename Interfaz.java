@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
 import java.awt.event.*; //no hemos visto el uso de toda la libreria
 import javax.swing.*;
 
-// probando github
 public class Interfaz extends JFrame implements ActionListener { // intentemos usar la sintaxis que hemos visto
     Juego juego = new Juego();
     public static int ANCHO = 400;
@@ -16,7 +15,7 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
     private int[] posicionesCirculos;
     // creo que esto podriamos cambiarlo a como lo vimos en clase
     JButton bMenu = new JButton("Jugar Cuatro en raya");
-    JLabel lMenu = new JLabel("Prueba de menu");
+    JLabel lMenu = new JLabel("Menu");
     // hasta aca
     Jugador jugador1;
     Jugador jugador2;
@@ -52,6 +51,7 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         
         tableroEscogido = String.valueOf(JOptionPane.showInputDialog(null, "seleccione un tamanio de tablero", "Tamanio",
             JOptionPane.QUESTION_MESSAGE, null, tableros, tableros[0]));
+
         System.out.println(tableroEscogido);
 
 
@@ -63,21 +63,20 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         setLayout(null);
         setVisible(true);
 
-        // hasta aca considero
-
     }
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == bMenu) {
             setVisible(false);
 
-            if (tableroEscogido=="6x7"){
-                ventanaJuego(720, 680, 7, 6);
+            if (tableroEscogido=="8x9"){
+                ventanaJuego(920, 840, 9, 8);
             } else if (tableroEscogido=="7x8"){
                 ventanaJuego(820, 760, 8, 7);    
-            } else{
-                ventanaJuego(920, 840, 9, 8);
-            }
+            } else { // poniendo el tablero 6x7 como default
+                ventanaJuego(720, 680, 7, 6);
+            } 
+
 
         }
     }
@@ -256,13 +255,15 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
             frame.add(b8);
 
         }
+        // arregle bug aqui
         if (w >= 920) {
+
             JButton b9 = new JButton("9");
             b9.setBounds(829, 100, 60, 40);
 
             b9.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    accionarBoton(jugadorActual, frame, tablero, w, h, 860, 7, turnosLabel, panel, layeredPane,
+                    accionarBoton(jugadorActual, frame, tablero, w, h, 860, 8, turnosLabel, panel, layeredPane,
                             imagenLabel, indicePosicionB9);
                     indicePosicionB9--;
 
