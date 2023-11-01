@@ -1,5 +1,5 @@
 public class Matriz {
-
+		// test 2
 	private int columna = 0; // por si quisieramos definirlo como negativo despues o algo
 	private int fila = 0;
 	private int vacio = 0; // por si quisieramos definirlo como negativo despues o algo
