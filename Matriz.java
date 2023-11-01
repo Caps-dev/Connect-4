@@ -107,14 +107,14 @@ public class Matriz {
 
 	public int verificarDiagonal(int id, int fila, int columna, int dF, int dC,
 			int cantidad, int contador) {
+		// implementacion recursiva
 		int status = 0;
-		if (contador == cantidad) {
+		if (contador >= cantidad) {
 			status = 1;
 		} else {
-			int nF = fila + dF;
-			int nC = columna + dC;
-			if (nF > 0 && nC > 0 && nF < matriz.length &&
-					nC < matriz[nF].length) {
+			int nF = fila + dF; //nueva fila
+			int nC = columna + dC; // nueva columna
+			if (nF >= 0 && nC >= 0 && nF < matriz.length &&	nC < matriz[nF].length) {
 				if (id == matriz[nF][nC]) {
 					status = verificarDiagonal(id, nF, nC, dF, dC, cantidad, contador + 1);
 				}
