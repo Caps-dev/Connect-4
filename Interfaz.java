@@ -432,35 +432,60 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         int gano = 0;
         gano = juegoBoton(w, h, tablero, x, columna, indice, colorActual, id);
         recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
+
         if (gano == 2) {
             JOptionPane.showMessageDialog(null,
                     "El ganador fue: " + ((id != jugador1.getId()) ? jugador1.getNombre() : jugador2.getNombre()),
                     "Hey!",
                     JOptionPane.INFORMATION_MESSAGE, imageIcon);
+
+            // Restablecer valores al estado inicial
+            turno = 1;
+            id = 13;
+            nombreJugadorActual = jugador1.getNombre();
+            resetPosicionesBotones();
+
             ranking.actualizarRanking((id != jugador1.getId()) ? jugador1.getNombre() : jugador2.getNombre(),
                     juego.getCantidadDeTurnos());
             ranking.ordenarRanking();
             frame.setVisible(false);
             setVisible(true);
-            turno = 1; // nuevo
             return;
         }
+
         if (gano == 9) {
             JOptionPane.showMessageDialog(null,
                     "Hubo un empate al turno : " + juego.getCantidadDeTurnos(),
                     "Hey!",
                     JOptionPane.INFORMATION_MESSAGE, imageIcon);
+
+            // Restablecer valores al estado inicial
+            turno = 1;
+            id = 13;
+            nombreJugadorActual = jugador1.getNombre();
+            resetPosicionesBotones();
+
             frame.setVisible(false);
             setVisible(true);
-            turno = 1; // nuevo
             return;
-
         }
 
         jugadorActual.setForeground(Color.getColor("ja", colorActual));
         jugadorActual.setText("Turno de " + nombreJugadorActual);
         turnosLabel.setText("Turno: " + juego.getCantidadDeTurnos());
         recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
-
     }
+
+    private void resetPosicionesBotones() {
+        indicePosicionB1 = posicionesCirculos.length - 1;
+        indicePosicionB2 = posicionesCirculos.length - 1;
+        indicePosicionB3 = posicionesCirculos.length - 1;
+        indicePosicionB4 = posicionesCirculos.length - 1;
+        indicePosicionB5 = posicionesCirculos.length - 1;
+        indicePosicionB6 = posicionesCirculos.length - 1;
+        indicePosicionB7 = posicionesCirculos.length - 1;
+        indicePosicionB8 = posicionesCirculos.length - 1;
+        indicePosicionB9 = posicionesCirculos.length - 1;
+    }
+
 }

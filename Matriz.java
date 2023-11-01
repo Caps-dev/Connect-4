@@ -49,27 +49,26 @@ public class Matriz {
 		return status;
 	}
 
-	public int hayEspacio() { //retorna -1 si hay espacio para fichas; 9 si no hay espacio
+	public int hayEspacio() { // retorna -1 si hay espacio para fichas; 9 si no hay espacio
 		int espaciosVacios = 0;
 
-		for (int i=0; i<matriz[0].length;i++){
+		for (int i = 0; i < matriz[0].length; i++) {
 
-			if (matriz[0][i]==0){
-				espaciosVacios ++;
+			if (matriz[0][i] == 0) {
+				espaciosVacios++;
 			}
-			
+
 		}
 
-		//System.out.println(espaciosVacios);
+		// System.out.println(espaciosVacios);
 
-		int estado = (espaciosVacios>0)?-1:9; //si hay espacios vacios hay espacio
+		int estado = (espaciosVacios > 0) ? -1 : 9; // si hay espacios vacios hay espacio
 
 		return estado; // se da un codigo particular para caso donde no hay espacio
 	}
 
+	public int verificarVertical(int id) {
 
-	public int verificarVertical(int id) { 
-		
 		int status = -1; // estado por defecto
 		int suma = 0; // condicion para ganar
 
@@ -80,7 +79,7 @@ public class Matriz {
 
 				if (matriz[f][c] == id) {
 					suma += id;
-					
+
 				} else {
 					suma = 0; // resetea el contador
 				}
@@ -106,7 +105,7 @@ public class Matriz {
 		for (int f = matriz.length - 1; f >= 0; f--) {
 			// System.out.println("Iteracion de F:" + f);
 
-			for (int c = matriz[0].length - 1; c >= 0; c--) { 
+			for (int c = matriz[0].length - 1; c >= 0; c--) {
 
 				if (matriz[f][c] == id) {
 					suma += id;
@@ -134,18 +133,18 @@ public class Matriz {
 		int status = 0;
 
 		/*
-		System.out.println("verificando id : " + id);
-		System.out.println("valor en matriz : " + matriz[dF][dC]);
-		System.out.println("fila actual:" + dF + " , columna actual: " + dC);
-		System.out.println("contador actual:  " + contador);
-		*/
+		 * System.out.println("verificando id : " + id);
+		 * System.out.println("valor en matriz : " + matriz[dF][dC]);
+		 * System.out.println("fila actual:" + dF + " , columna actual: " + dC);
+		 * System.out.println("contador actual:  " + contador);
+		 */
 
 		if (contador >= cantidad) { // fin de la recursion
 			status = 1;
 		} else {
-			int nF = fila + dF; //nueva fila
+			int nF = fila + dF; // nueva fila
 			int nC = columna + dC; // nueva columna
-			if (nF >= 0 && nC >= 0 && nF < matriz.length &&	nC < matriz[nF].length) {
+			if (nF >= 0 && nC >= 0 && nF < matriz.length && nC < matriz[nF].length) {
 				if (id == matriz[nF][nC]) {
 					status = verificarDiagonal(id, nF, nC, dF, dC, cantidad, contador + 1);
 				}
@@ -161,51 +160,44 @@ public class Matriz {
 	public int verificarEstado(int id) {
 		int estado = -1;
 
-
 		estado = verificarVertical(id);
 		if (estado == -1) {
 			estado = verificarHorizontal(id);
-		} 
+		}
 
 		if (estado == -1) {
 			System.out.println("verificando diagonal------------------------------------");
 
-			int diagonalDerechaAbajo = 0;
-			int diagonalIzquierdaArriba = 0;
+			int diagonalDerechaAbajo = verificarDiagonal(id, fila, columna, 1, 1, 4, 1);
+			int diagonalIzquierdaAbajo = verificarDiagonal(id, fila, columna, 1, -1, 4, 1);
+			int diagonalDerechaArriba = verificarDiagonal(id, fila, columna, -1, 1, 4, 1);
+			int diagonalIzquierdaArriba = verificarDiagonal(id, fila, columna, -1, -1, 4, 1);
+			/*
+			 * System.out.println("diagonalDerechaAbajo ");
+			 * System.out.println("diagonalDerechaAbajo "+ diagonalDerechaAbajo);
+			 * System.out.println(" ");
+			 * 
+			 * 
+			 * 
+			 * System.out.println("diagonalIzquierdaArriba ");
+			 * System.out.println("diagonalIzquierdaArriba "+ diagonalIzquierdaArriba);
+			 * System.out.println(" ");
+			 * 
+			 * 
+			 * 
+			 * System.out.println("diagonalDerechaArriba ");
+			 * System.out.println("diagonalDerechaArriba "+ diagonalDerechaArriba);
+			 * System.out.println(" ");
+			 */
 
-			int diagonalDerechaArriba = 0;
-			int diagonalIzquierdaAbajo = 0;
-
-			//int diagonalDerechaAbajo = verificarDiagonal(id, fila, columna, 1, 1, 4, 1);
-			//int diagonalIzquierdaAbajo = verificarDiagonal(id, fila, columna, 1, -1, 4, 1);
-			//int diagonalDerechaArriba = verificarDiagonal(id, fila, columna, -1, 1, 4, 1);
-			//int diagonalIzquierdaArriba = verificarDiagonal(id, fila, columna, -1, -1, 4, 1);
-/*
-			System.out.println("diagonalDerechaAbajo ");
-			System.out.println("diagonalDerechaAbajo "+ diagonalDerechaAbajo);
-			System.out.println(" ");
-
-
-
-			System.out.println("diagonalIzquierdaArriba ");
-			System.out.println("diagonalIzquierdaArriba "+ diagonalIzquierdaArriba);
-			System.out.println(" ");
-
-
-
-			System.out.println("diagonalDerechaArriba ");
-			System.out.println("diagonalDerechaArriba "+ diagonalDerechaArriba);
-			System.out.println(" ");
-*/
-
-/*
-
-			System.out.println("diagonalIzquierdaAbajo ");
-			System.out.println("diagonalIzquierdaAbajo "+ diagonalIzquierdaAbajo);
-			System.out.println(" ");
-			System.out.println("-------------------------------------------- ");	
-
-*/
+			/*
+			 * 
+			 * System.out.println("diagonalIzquierdaAbajo ");
+			 * System.out.println("diagonalIzquierdaAbajo "+ diagonalIzquierdaAbajo);
+			 * System.out.println(" ");
+			 * System.out.println("-------------------------------------------- ");
+			 * 
+			 */
 
 			if (diagonalIzquierdaAbajo == 3 || diagonalDerechaAbajo == 3 || diagonalDerechaArriba == 3
 					|| diagonalIzquierdaArriba == 3) {
@@ -215,8 +207,8 @@ public class Matriz {
 			}
 		}
 
-		if (estado == -1){
-			//System.out.println("verificando si hay espacio");
+		if (estado == -1) {
+			// System.out.println("verificando si hay espacio");
 			estado = hayEspacio();
 
 		}
