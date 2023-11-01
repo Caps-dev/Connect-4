@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.awt.event.*; //no hemos visto el uso de toda la libreria
 import javax.swing.*;
 
-//desde extends esta chiva pero creo que la idea es evitar recursos externos
+// probando github
 public class Interfaz extends JFrame implements ActionListener { // intentemos usar la sintaxis que hemos visto
     Juego juego = new Juego();
     public static int ANCHO = 400;
@@ -15,7 +15,7 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
     private int[][] dibujo = null;
     private int[] posicionesCirculos;
     // creo que esto podriamos cambiarlo a como lo vimos en clase
-    JButton bMenu = new JButton("Juegar Cuatro en raya");
+    JButton bMenu = new JButton("Jugar Cuatro en raya");
     JLabel lMenu = new JLabel("Prueba de menu");
     // hasta aca
     Jugador jugador1;
