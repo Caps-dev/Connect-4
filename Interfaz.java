@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
 import java.awt.event.*; //no hemos visto el uso de toda la libreria
 import javax.swing.*;
 
-// probando github
 public class Interfaz extends JFrame implements ActionListener { // intentemos usar la sintaxis que hemos visto
     Juego juego = new Juego();
     public static int ANCHO = 400;
@@ -16,7 +15,7 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
     private int[] posicionesCirculos;
     // creo que esto podriamos cambiarlo a como lo vimos en clase
     JButton bMenu = new JButton("Jugar Cuatro en raya");
-    JLabel lMenu = new JLabel("Prueba de menu");
+    JLabel lMenu = new JLabel("Menu");
     // hasta aca
     Jugador jugador1;
     Jugador jugador2;
@@ -33,7 +32,7 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
     int indicePosicionB9;
     Jugador actualJugador;
     int colorActual;
-    int turno = 1;
+    int turno= 1; // valor inicial
     int id = 13;
     String nombreJugadorActual;
 
@@ -52,6 +51,7 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         
         tableroEscogido = String.valueOf(JOptionPane.showInputDialog(null, "seleccione un tamanio de tablero", "Tamanio",
             JOptionPane.QUESTION_MESSAGE, null, tableros, tableros[0]));
+
         System.out.println(tableroEscogido);
 
 
@@ -63,21 +63,20 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         setLayout(null);
         setVisible(true);
 
-        // hasta aca considero
-
     }
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == bMenu) {
             setVisible(false);
 
-            if (tableroEscogido=="6x7"){
-                ventanaJuego(720, 680, 7, 6);
+            if (tableroEscogido=="8x9"){
+                ventanaJuego(920, 840, 9, 8);
             } else if (tableroEscogido=="7x8"){
                 ventanaJuego(820, 760, 8, 7);    
-            } else{
-                ventanaJuego(920, 840, 9, 8);
-            }
+            } else { // poniendo el tablero 6x7 como default
+                ventanaJuego(720, 680, 7, 6);
+            } 
+
 
         }
     }
@@ -85,9 +84,9 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
     public void ventanaJuego(int w, int h, int x, int y) {
         juego.setCantidadDeTurnos(0);
         jugador1.setNombre(pedirNombre("jugador 1")); //valores default por si no hay escogencia
-        jugador1.setColor(pedirColor(-16776961)); // ibid
+        jugador1.setColor(pedirColor(-16776961)); // solo busque el codigo de color del rojo
         jugador2.setNombre(pedirNombre("jugador 2")); // ibid
-        jugador2.setColor(pedirColor(-65536)); //ibid
+        jugador2.setColor(pedirColor(-65536)); // solo busque el codigo de color del azul
         imagen = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
         nombreJugadorActual = jugador1.getNombre();
 
@@ -99,6 +98,7 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
             posicion += 81;
         }
         juego.setCantidadDeTurnos(0);
+        turno= 1; // el error esta aqui
         indicePosicionB1 = posicionesCirculos.length - 1;
         indicePosicionB2 = posicionesCirculos.length - 1;
         indicePosicionB3 = posicionesCirculos.length - 1;
@@ -146,6 +146,7 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         // Agrega el JLabel al panel
         JLabel l1 = new JLabel(jugador1.getNombre(), JLabel.CENTER);
         JLabel l2 = new JLabel(jugador2.getNombre(), JLabel.CENTER);
+
         colorActual = jugador1.color;
         JLabel jugadorActual = new JLabel("Es turno de " + nombreJugadorActual, JLabel.CENTER);
         turnosLabel.setForeground(Color.BLACK);
@@ -160,6 +161,7 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         panel.add(l1);
         panel.add(jugadorActual);
         panel.add(turnosLabel);
+
         JButton b1 = new JButton("1");
         JButton b2 = new JButton("2");
         JButton b3 = new JButton("3");
@@ -256,13 +258,15 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
             frame.add(b8);
 
         }
+        // habia bug aqui, its fixed now
         if (w >= 920) {
+
             JButton b9 = new JButton("9");
             b9.setBounds(829, 100, 60, 40);
 
             b9.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    accionarBoton(jugadorActual, frame, tablero, w, h, 860, 7, turnosLabel, panel, layeredPane,
+                    accionarBoton(jugadorActual, frame, tablero, w, h, 860, 8, turnosLabel, panel, layeredPane,
                             imagenLabel, indicePosicionB9);
                     indicePosicionB9--;
 
@@ -291,10 +295,6 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         frame.revalidate();
 
     }
-
-    // hasta aqui es bastante dificil de entender
-    /////////////////////////////
-
     private void dibujarLinea(int desdeX, int hastaX, int desdeY, int hastaY) {
 
         for (int i = desdeX; i < hastaX; i++) {
@@ -304,8 +304,8 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         }
     }
 
-    // esto deberia en la clase juego
     private void cambioJugador() {
+
         if (turno == 1) {
             colorActual = jugador2.color;
             id = 1;
@@ -370,7 +370,6 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         }
     }
 
-    // por que hay dibujarlinea1 y dibujarlinea2?
     private void dibujarLinea2(int fI, int cI, int fF, int cF, int color) {
         int fInicialCopia = fI < fF ? fI : fF;
         fF = fI > fF ? fI : fF;
@@ -401,8 +400,6 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         frame.repaint();
     }
 
-    // esto esta bonito pero preferiria hacerlo hardcoded por simplicidad y eliminar
-    // librerias
     private int pedirColor(int colorDefault) {
         Color color;
         int colorRGB = 0;
@@ -432,8 +429,23 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
                     JOptionPane.INFORMATION_MESSAGE, imageIcon);
             frame.setVisible(false);
             setVisible(true);
+            turno= 1; // nuevo
             return;
         }
+        if (gano==9){
+            JOptionPane.showMessageDialog(null,
+                    "Hubo un empate al turno : " + juego.getCantidadDeTurnos(),
+                    "Hey!",
+                    JOptionPane.INFORMATION_MESSAGE, imageIcon);
+            frame.setVisible(false);
+            setVisible(true);
+            turno= 1; // nuevo
+            return;
+
+        }
+
+
+
         jugadorActual.setForeground(Color.getColor("ja", colorActual));
         jugadorActual.setText("Turno de " + nombreJugadorActual);
         turnosLabel.setText("Turno: " + juego.getCantidadDeTurnos());
