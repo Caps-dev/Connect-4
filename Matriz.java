@@ -161,7 +161,6 @@ public class Matriz {
 
 	 */
 	public int verificarHorizontal(int id) { // todo: decir las coordenadas con las que gano
-		System.out.println("Verificando Horizontalmente");
 		int status = -1; // estado por defecto
 		int suma = 0; // condicion para ganar
 
@@ -170,9 +169,7 @@ public class Matriz {
 			suma = 0; // resetea el contador al cambiar de fila
 
 			for (int c = matriz[0].length - 1; c >= 0; c--) {
-			 	System.out.println("Iteracion de c:" + c);
-			 	System.out.println("Coordenadas" + f + " , " + c);
-			 	System.out.println("Suma " + suma);
+
 
 				if (matriz[f][c] == id) {
 					suma += id;
