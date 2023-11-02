@@ -18,7 +18,7 @@ public class Main {
          * 
          * //System.out.println(matriz.hayEspacio());
          * juego.verificarGanador(matriz,1,14);
-         */
+         */   
         Interfaz i = new Interfaz(jugador1, jugador2);
 
     }

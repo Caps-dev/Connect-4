@@ -1,6 +1,6 @@
 //! \class Clase Juego de 4 en linea
 /*!
-  Clase encargada de representar el tablero de juego.
+  Clase encargada de representar el estado y reglas del juego.
   Proporciona métodos relacionados a los turnos y verificacion sobre si el juego se encuentra activo o, si más bien, ha terminado por un gane o un empate.
 */
 public class Juego {
