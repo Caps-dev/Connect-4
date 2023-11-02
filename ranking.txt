@@ -1,10 +1,1 @@
-Allan:7
-pedro:7
-Allan:7
-pablo:8
-Camilo:8
-jugador 1:11
-Allan:13
-Camilo:13
-jugador 2:24
-jugador 2:26
+
