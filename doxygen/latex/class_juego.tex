@@ -1,0 +1,125 @@
+\doxysection{Juego Class Reference}
+\hypertarget{class_juego}{}\label{class_juego}\index{Juego@{Juego}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_juego_adb0244ae69d0571c6ccb9649dd854f7f}{set\+Es\+Activo}} (int es\+Activo)
+\begin{DoxyCompactList}\small\item\em Asigna un estado al juego. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_juego_a2629ca267869bda4f07d60d85597151b}{set\+Cantidad\+De\+Turnos}} (int cantidad\+De\+Turnos)
+\begin{DoxyCompactList}\small\item\em Asigna la cantidad de turnos al juego. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_juego_ac17d29b7a6758305c80d72cea30f625d}{get\+Es\+Activo}} ()
+\begin{DoxyCompactList}\small\item\em Retorna el estado del juego. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_juego_a666a813db535e3502dc75390b757d0bd}{get\+Cantidad\+De\+Turnos}} ()
+\begin{DoxyCompactList}\small\item\em Retorna el estado del juego. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_juego_acc13f630bdd5aef4f411f8e90c9ec551}{Sumar\+Turno}} ()
+\begin{DoxyCompactList}\small\item\em Agrega un turno al juego. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_juego_ac8545025f78de9865ca4efa9b6d9c6bc}{verificar\+Ganador}} (\mbox{\hyperlink{class_matriz}{Matriz}} matriz, int id\+J1, int id\+J2)
+\begin{DoxyCompactList}\small\item\em Verifica el ganador del juego. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Clase encargada de representar el estado y reglas del juego. Proporciona métodos relacionados a los turnos y verificacion sobre si el juego se encuentra activo o, si más bien, ha terminado por un gane o un empate. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_juego_a666a813db535e3502dc75390b757d0bd}\label{class_juego_a666a813db535e3502dc75390b757d0bd} 
+\index{Juego@{Juego}!getCantidadDeTurnos@{getCantidadDeTurnos}}
+\index{getCantidadDeTurnos@{getCantidadDeTurnos}!Juego@{Juego}}
+\doxysubsubsection{\texorpdfstring{getCantidadDeTurnos()}{getCantidadDeTurnos()}}
+{\footnotesize\ttfamily int Juego.\+get\+Cantidad\+De\+Turnos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Retorna el estado del juego. 
+
+\begin{DoxyReturn}{Returns}
+int cantidad de turnos que lleva el juego. 
+\end{DoxyReturn}
+\Hypertarget{class_juego_ac17d29b7a6758305c80d72cea30f625d}\label{class_juego_ac17d29b7a6758305c80d72cea30f625d} 
+\index{Juego@{Juego}!getEsActivo@{getEsActivo}}
+\index{getEsActivo@{getEsActivo}!Juego@{Juego}}
+\doxysubsubsection{\texorpdfstring{getEsActivo()}{getEsActivo()}}
+{\footnotesize\ttfamily int Juego.\+get\+Es\+Activo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Retorna el estado del juego. 
+
+\begin{DoxyReturn}{Returns}
+int representacion numerica del estado del juego. 
+\end{DoxyReturn}
+\Hypertarget{class_juego_a2629ca267869bda4f07d60d85597151b}\label{class_juego_a2629ca267869bda4f07d60d85597151b} 
+\index{Juego@{Juego}!setCantidadDeTurnos@{setCantidadDeTurnos}}
+\index{setCantidadDeTurnos@{setCantidadDeTurnos}!Juego@{Juego}}
+\doxysubsubsection{\texorpdfstring{setCantidadDeTurnos()}{setCantidadDeTurnos()}}
+{\footnotesize\ttfamily void Juego.\+set\+Cantidad\+De\+Turnos (\begin{DoxyParamCaption}\item[{int}]{cantidad\+De\+Turnos }\end{DoxyParamCaption})}
+
+
+
+Asigna la cantidad de turnos al juego. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & cantidad de turnos que lleva la partida. Inicia en 0 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_juego_adb0244ae69d0571c6ccb9649dd854f7f}\label{class_juego_adb0244ae69d0571c6ccb9649dd854f7f} 
+\index{Juego@{Juego}!setEsActivo@{setEsActivo}}
+\index{setEsActivo@{setEsActivo}!Juego@{Juego}}
+\doxysubsubsection{\texorpdfstring{setEsActivo()}{setEsActivo()}}
+{\footnotesize\ttfamily void Juego.\+set\+Es\+Activo (\begin{DoxyParamCaption}\item[{int}]{es\+Activo }\end{DoxyParamCaption})}
+
+
+
+Asigna un estado al juego. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & representacion del estado del juego. 1 indica que se encuentra activo \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_juego_acc13f630bdd5aef4f411f8e90c9ec551}\label{class_juego_acc13f630bdd5aef4f411f8e90c9ec551} 
+\index{Juego@{Juego}!SumarTurno@{SumarTurno}}
+\index{SumarTurno@{SumarTurno}!Juego@{Juego}}
+\doxysubsubsection{\texorpdfstring{SumarTurno()}{SumarTurno()}}
+{\footnotesize\ttfamily int Juego.\+Sumar\+Turno (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Agrega un turno al juego. 
+
+\begin{DoxyReturn}{Returns}
+int cantidad de turnos del juego 
+\end{DoxyReturn}
+\Hypertarget{class_juego_ac8545025f78de9865ca4efa9b6d9c6bc}\label{class_juego_ac8545025f78de9865ca4efa9b6d9c6bc} 
+\index{Juego@{Juego}!verificarGanador@{verificarGanador}}
+\index{verificarGanador@{verificarGanador}!Juego@{Juego}}
+\doxysubsubsection{\texorpdfstring{verificarGanador()}{verificarGanador()}}
+{\footnotesize\ttfamily int Juego.\+verificar\+Ganador (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_matriz}{Matriz}}}]{matriz,  }\item[{int}]{id\+J1,  }\item[{int}]{id\+J2 }\end{DoxyParamCaption})}
+
+
+
+Verifica el ganador del juego. 
+
+Mediante la verificacion del estado de cada jugador se retorna un entero que representa el estado del juego de manera que\+: ~\newline
+-\/1\+: Ningun jugador ha ganado ~\newline
+9\+: Empate ~\newline
+2\+: Uno de los dos jugadores ha ganado ~\newline
+ En caso de haber un ganador o un empate se cambia el atributo \textquotesingle{}es\+Activo\textquotesingle{} a -\/1
+
+
+\begin{DoxyParams}{Parameters}
+{\em \doxylink{class_matriz}{Matriz}} & matriz que representa el tablero de juego \\
+\hline
+{\em int} & id del jugador 1 \\
+\hline
+{\em int} & id del jugador 2\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int representacion numerica del estado del juego 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Juego.\+java\end{DoxyCompactItemize}

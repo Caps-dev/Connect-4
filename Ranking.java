@@ -1,13 +1,24 @@
 import java.io.*;
+//! \class Clase Ranking del juego 4 en linea
+/*!
+  
+  Clase encargada de guardar, acomodar y leer el ranking del juego
+  Es la implementacion del ranking donde puede leer el archivo acomodarlo y guardar en nombre y la cantidad de turnos
+*/
 
 public class Ranking {
-    private BufferedWriter escritor;
-    private BufferedReader lector;
-    private boolean estaAbierto;
-    private String[] nombres = new String[10];
-    private int[] puntos = new int[10];
-    private static final String RUTA = "ranking.txt";
-    private int numJugadores = 0;
+    private BufferedWriter escritor; /*!< escritor del archivo, permite escribir el archivo */
+    private BufferedReader lector; /*!< lector permite leer el archivo y sacar la informacion*/
+    private boolean estaAbierto; /*!< es un boolean que permite saber si el archivo esta correctamente abierto*/
+    private String[] nombres = new String[10]; /*!< guarda los nombre de la lista de juego para despues acomodarlos*/
+    private int[] puntos = new int[10]; /*!< guarda los "puntos" de cada jugador en el ranking para despues acomodarlos*/
+    private static final String RUTA = "ranking.txt"; /*!< Ruta del archivo donde se va a guardar todo*/
+    private int numJugadores = 0; /*!< cantidad de jugadores que hay en el ranking*/
+
+    /*! \brief Constructor 
+     *
+     * Se utiliza para abrir el arhivo y comprobar si se abrio corectamente
+     */
 
     public Ranking() {
         try {
@@ -21,6 +32,10 @@ public class Ranking {
         }
     }
 
+    /*! \brief Cerrar el archivo cuando ya no se esta utilizando
+     *  cierra el archivo al, se utiliza hasta el final
+     */
+
     public void cerrar() {
         try {
             lector.close();
@@ -31,6 +46,12 @@ public class Ranking {
         }
     }
 
+    /*! \brief Agrega un jugador nuevo al ranking 
+     *  \param nombre del jugador a añadir
+     *  \param cantidad de turnos utilizados para ganar
+     *
+     */
+
     public void agregarJugadorAlRanking(String nombre, int puntos) {
         if (numJugadores < 10) {
             nombres[numJugadores] = nombre;
@@ -40,6 +61,10 @@ public class Ranking {
         }
     }
 
+
+    /*! \brief El lector del ranking guardado añadiendolos a la lista correspondiente
+     *
+     */
     private void cargarRanking() {
         if (estaAbierto) {
             try {
@@ -61,7 +86,9 @@ public class Ranking {
             }
         }
     }
-
+    /*! \brief Reescribe el ranking despues de ordenarlo
+     *
+     */
     private void actualizarArchivo() {
         if (estaAbierto) {
             try {
@@ -78,18 +105,10 @@ public class Ranking {
         }
     }
 
-    public String[] obtenerNombresRanking() {
-        String[] nombresRanking = new String[numJugadores];
-        System.arraycopy(nombres, 0, nombresRanking, 0, numJugadores);
-        return nombresRanking;
-    }
 
-    public int[] obtenerPuntosRanking() {
-        int[] puntosRanking = new int[numJugadores];
-        System.arraycopy(puntos, 0, puntosRanking, 0, numJugadores);
-        return puntosRanking;
-    }
-
+    /*! \brief ordena el ranking de menor a mayor
+     *
+     */
     public void ordenarRanking() {
         for (int i = 0; i < numJugadores; i++) {
             for (int j = i + 1; j < numJugadores; j++) {
@@ -105,20 +124,35 @@ public class Ranking {
         }
     }
 
+
+     /*! \brief actualiza el ranking agregando al jugador
+      * \param nombre del nuevo jugador
+      * \param puntos del nuevo jugador
+     *
+     */
+    
+
     public void actualizarRanking(String nombre, int puntos) {
         agregarJugadorAlRanking(nombre, puntos);
     }
+     /*! \brief muestra el contenido del ranking
+      *  \return contenido del archivo ranking 
+     *
+     */
+    
 
     public String obtenerContenidoRanking() {
+        String contenidos;
         if (estaAbierto) {
             StringBuilder contenido = new StringBuilder();
             for (int i = 0; i < numJugadores; i++) {
                 contenido.append(nombres[i]).append(":").append(puntos[i]);
                 contenido.append(System.lineSeparator());
             }
-            return contenido.toString();
+            contenidos = contenido.toString();
         } else {
-            return "No se pudo abrir el archivo de ranking.";
+            contenidos =  "No se pudo abrir el archivo de ranking.";
         }
+        return contenidos;
     }
 }

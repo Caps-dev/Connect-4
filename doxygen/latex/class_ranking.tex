@@ -1,0 +1,90 @@
+\doxysection{Ranking Class Reference}
+\hypertarget{class_ranking}{}\label{class_ranking}\index{Ranking@{Ranking}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_ranking_ad4e7f21ecd5bbb4bbd49e8c2d78847be}{Ranking}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\Hypertarget{class_ranking_a66b0237b3b4881f44553e0bd20753c8e}\label{class_ranking_a66b0237b3b4881f44553e0bd20753c8e} 
+void {\bfseries cerrar} ()
+\begin{DoxyCompactList}\small\item\em Cerrar el archivo cuando ya no se esta utilizando cierra el archivo al, se utiliza hasta el final. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_ranking_ac9bf76d4fea759a93cada79cecbdbbe4}{agregar\+Jugador\+Al\+Ranking}} (String nombre, int puntos)
+\begin{DoxyCompactList}\small\item\em Agrega un jugador nuevo al ranking. \end{DoxyCompactList}\item 
+\Hypertarget{class_ranking_a6907f4d75758683ba8fc2026125e3579}\label{class_ranking_a6907f4d75758683ba8fc2026125e3579} 
+void {\bfseries ordenar\+Ranking} ()
+\begin{DoxyCompactList}\small\item\em ordena el ranking de menor a mayor \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_ranking_aaf74caec8c7456593ecd966a3bde1334}{actualizar\+Ranking}} (String nombre, int puntos)
+\begin{DoxyCompactList}\small\item\em actualiza el ranking agregando al jugador \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{class_ranking_a7034ecf1bfa087d4b1837b0f13e8c9e8}{obtener\+Contenido\+Ranking}} ()
+\begin{DoxyCompactList}\small\item\em muestra el contenido del ranking \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Clase encargada de guardar, acomodar y leer el ranking del juego Es la implementacion del ranking donde puede leer el archivo acomodarlo y guardar en nombre y la cantidad de turnos 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_ranking_ad4e7f21ecd5bbb4bbd49e8c2d78847be}\label{class_ranking_ad4e7f21ecd5bbb4bbd49e8c2d78847be} 
+\index{Ranking@{Ranking}!Ranking@{Ranking}}
+\index{Ranking@{Ranking}!Ranking@{Ranking}}
+\doxysubsubsection{\texorpdfstring{Ranking()}{Ranking()}}
+{\footnotesize\ttfamily Ranking.\+Ranking (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+Se utiliza para abrir el arhivo y comprobar si se abrio corectamente 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_ranking_aaf74caec8c7456593ecd966a3bde1334}\label{class_ranking_aaf74caec8c7456593ecd966a3bde1334} 
+\index{Ranking@{Ranking}!actualizarRanking@{actualizarRanking}}
+\index{actualizarRanking@{actualizarRanking}!Ranking@{Ranking}}
+\doxysubsubsection{\texorpdfstring{actualizarRanking()}{actualizarRanking()}}
+{\footnotesize\ttfamily void Ranking.\+actualizar\+Ranking (\begin{DoxyParamCaption}\item[{String}]{nombre,  }\item[{int}]{puntos }\end{DoxyParamCaption})}
+
+
+
+actualiza el ranking agregando al jugador 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nombre} & del nuevo jugador \\
+\hline
+{\em puntos} & del nuevo jugador \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_ranking_ac9bf76d4fea759a93cada79cecbdbbe4}\label{class_ranking_ac9bf76d4fea759a93cada79cecbdbbe4} 
+\index{Ranking@{Ranking}!agregarJugadorAlRanking@{agregarJugadorAlRanking}}
+\index{agregarJugadorAlRanking@{agregarJugadorAlRanking}!Ranking@{Ranking}}
+\doxysubsubsection{\texorpdfstring{agregarJugadorAlRanking()}{agregarJugadorAlRanking()}}
+{\footnotesize\ttfamily void Ranking.\+agregar\+Jugador\+Al\+Ranking (\begin{DoxyParamCaption}\item[{String}]{nombre,  }\item[{int}]{puntos }\end{DoxyParamCaption})}
+
+
+
+Agrega un jugador nuevo al ranking. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nombre} & del jugador a añadir \\
+\hline
+{\em cantidad} & de turnos utilizados para ganar \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_ranking_a7034ecf1bfa087d4b1837b0f13e8c9e8}\label{class_ranking_a7034ecf1bfa087d4b1837b0f13e8c9e8} 
+\index{Ranking@{Ranking}!obtenerContenidoRanking@{obtenerContenidoRanking}}
+\index{obtenerContenidoRanking@{obtenerContenidoRanking}!Ranking@{Ranking}}
+\doxysubsubsection{\texorpdfstring{obtenerContenidoRanking()}{obtenerContenidoRanking()}}
+{\footnotesize\ttfamily String Ranking.\+obtener\+Contenido\+Ranking (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+muestra el contenido del ranking 
+
+\begin{DoxyReturn}{Returns}
+contenido del archivo ranking 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Ranking.\+java\end{DoxyCompactItemize}

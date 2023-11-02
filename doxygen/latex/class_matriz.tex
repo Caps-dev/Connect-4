@@ -1,0 +1,248 @@
+\doxysection{Matriz Class Reference}
+\hypertarget{class_matriz}{}\label{class_matriz}\index{Matriz@{Matriz}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_matriz_aa718bc195848b53848d7b2ba2e3b2766}{Matriz}} (int nfila\+Paramentro, int ncolumna\+Parametro)
+\begin{DoxyCompactList}\small\item\em Constructor sobrecargado. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_matriz_a1b513282848acb1355bb39069410398c}{getnfila}} ()
+\begin{DoxyCompactList}\small\item\em Retorna el valor actual de la fila. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_matriz_a48e8993ca6131796e735ecb5282da91b}{getncolumnas}} ()
+\begin{DoxyCompactList}\small\item\em Retorna el valor actual de la columna. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_matriz_a7536098017d7823124a81c5980fdef22}{imprimir}} ()
+\begin{DoxyCompactList}\small\item\em Imprime el contenido de la matriz / tablero. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_matriz_a1a6f144d329ad1dbc9bf84568d074930}{agregar\+Ficha}} (int c\+Usuario, int id)
+\begin{DoxyCompactList}\small\item\em Agrega una ficha al tablero. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_matriz_abf98827a922f2ede6fc4bd9557a88cdd}{hay\+Espacio}} ()
+\begin{DoxyCompactList}\small\item\em Verifica si hay espacios disponibles para agregar una ficha. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_matriz_a19589e2fe6534d3713d6c79db8a0facf}{verificar\+Vertical}} (int id)
+\begin{DoxyCompactList}\small\item\em Verifica si hay 4 o más fichas de un jugador de manera seguida vertical. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_matriz_a6012dc9bd3a5d77d590458865281c07e}{verificar\+Horizontal}} (int id)
+\begin{DoxyCompactList}\small\item\em Verifica si hay 4 o más fichas de un jugador de manera seguida horizontal. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_matriz_a8ee12c70d979ddc6292a50a8f82a3819}{verificar\+Diagonal}} (int id, int fila, int columna, int dF, int dC, int cantidad)
+\begin{DoxyCompactList}\small\item\em Verifica cuantas fichas de un jugador de manera seguida diagonal hay, dada una direccion. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_matriz_ad7470b596e5b3cbdeea188eb850d329a}{verificar\+Diagonales}} (int id, int fila, int columna)
+\begin{DoxyCompactList}\small\item\em Verifica si hay 4 o más fichas de un jugador de manera seguida en las 2 diagonales. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_matriz_a975d23196472cc9f9784ac08fefd4dd0}{verificar\+Estado}} (int id)
+\begin{DoxyCompactList}\small\item\em Verifica el estado de un jugador y determina si ya gano o no. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Clase encargada de representar el tablero de juego donde se insertan las fichas Es la implementacion interna donde se realizan verificaciones sobre la logica que complementa con la interfaz para una mejor experiencia 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_matriz_aa718bc195848b53848d7b2ba2e3b2766}\label{class_matriz_aa718bc195848b53848d7b2ba2e3b2766} 
+\index{Matriz@{Matriz}!Matriz@{Matriz}}
+\index{Matriz@{Matriz}!Matriz@{Matriz}}
+\doxysubsubsection{\texorpdfstring{Matriz()}{Matriz()}}
+{\footnotesize\ttfamily Matriz.\+Matriz (\begin{DoxyParamCaption}\item[{int}]{nfila\+Paramentro,  }\item[{int}]{ncolumna\+Parametro }\end{DoxyParamCaption})}
+
+
+
+Constructor sobrecargado. 
+
+Se utiliza para instanciar el objeto y asignarle el numero de filas y columnas a la matriz. 
+\begin{DoxyParams}{Parameters}
+{\em nfila\+Paramentro} & número entero para indicar el numero de filas. \\
+\hline
+{\em ncolumna\+Parametro} & número entero para indicar el numero de columnas. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_matriz_a1a6f144d329ad1dbc9bf84568d074930}\label{class_matriz_a1a6f144d329ad1dbc9bf84568d074930} 
+\index{Matriz@{Matriz}!agregarFicha@{agregarFicha}}
+\index{agregarFicha@{agregarFicha}!Matriz@{Matriz}}
+\doxysubsubsection{\texorpdfstring{agregarFicha()}{agregarFicha()}}
+{\footnotesize\ttfamily int Matriz.\+agregar\+Ficha (\begin{DoxyParamCaption}\item[{int}]{c\+Usuario,  }\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+Agrega una ficha al tablero. 
+
+El usuario escoge la columna, mediante una interfaz y se agrega una ficha al tablero. ~\newline
+ La ficha se representa mediante el ID del jugador. ~\newline
+ Si hay espacios disponibles se agrega la ficha encima de la ultima ficha colocada. ~\newline
+ Si no hay espacios disponibles para agregar la ficha se retorna un -\/1 ~\newline
+ Si habia espacios disponibles y se inserta la ficha se retorna un 1. ~\newline
+ (el valor de retorno se utiliza en la interfaz para asignar el mensaje correcto al usuario)~\newline
+
+\begin{DoxyParams}{Parameters}
+{\em int} & Columna escogida por el usuario \\
+\hline
+{\em int} & Identificador del usuario \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int entero que indica si se pudo agregar la ficha. (1 exito, -\/1 fracaso) 
+\end{DoxyReturn}
+\Hypertarget{class_matriz_a48e8993ca6131796e735ecb5282da91b}\label{class_matriz_a48e8993ca6131796e735ecb5282da91b} 
+\index{Matriz@{Matriz}!getncolumnas@{getncolumnas}}
+\index{getncolumnas@{getncolumnas}!Matriz@{Matriz}}
+\doxysubsubsection{\texorpdfstring{getncolumnas()}{getncolumnas()}}
+{\footnotesize\ttfamily int Matriz.\+getncolumnas (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Retorna el valor actual de la columna. 
+
+\begin{DoxyReturn}{Returns}
+int columna actual de la matriz 
+\end{DoxyReturn}
+\Hypertarget{class_matriz_a1b513282848acb1355bb39069410398c}\label{class_matriz_a1b513282848acb1355bb39069410398c} 
+\index{Matriz@{Matriz}!getnfila@{getnfila}}
+\index{getnfila@{getnfila}!Matriz@{Matriz}}
+\doxysubsubsection{\texorpdfstring{getnfila()}{getnfila()}}
+{\footnotesize\ttfamily int Matriz.\+getnfila (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Retorna el valor actual de la fila. 
+
+\begin{DoxyReturn}{Returns}
+int fila actual de la matriz 
+\end{DoxyReturn}
+\Hypertarget{class_matriz_abf98827a922f2ede6fc4bd9557a88cdd}\label{class_matriz_abf98827a922f2ede6fc4bd9557a88cdd} 
+\index{Matriz@{Matriz}!hayEspacio@{hayEspacio}}
+\index{hayEspacio@{hayEspacio}!Matriz@{Matriz}}
+\doxysubsubsection{\texorpdfstring{hayEspacio()}{hayEspacio()}}
+{\footnotesize\ttfamily int Matriz.\+hay\+Espacio (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Verifica si hay espacios disponibles para agregar una ficha. 
+
+Itera por la primera fila del tablero / matriz, cuenta cuantos espacios vacios hay. ~\newline
+ Si hay espacios disponibles se retorna -\/1. ~\newline
+ Si no hay espacios disponibles se retorna 9 ~\newline
+\begin{DoxyReturn}{Returns}
+int entero que indica si hay espacios vacios. (-\/1 hay espacio, 9 no hay espacios vacios) 
+\end{DoxyReturn}
+\Hypertarget{class_matriz_a7536098017d7823124a81c5980fdef22}\label{class_matriz_a7536098017d7823124a81c5980fdef22} 
+\index{Matriz@{Matriz}!imprimir@{imprimir}}
+\index{imprimir@{imprimir}!Matriz@{Matriz}}
+\doxysubsubsection{\texorpdfstring{imprimir()}{imprimir()}}
+{\footnotesize\ttfamily void Matriz.\+imprimir (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Imprime el contenido de la matriz / tablero. 
+
+Imprime en consola el contenido de la matriz. Metodo usado para el desarrollo y testeo del juego. El usuario no interactua con este metodo. \Hypertarget{class_matriz_a8ee12c70d979ddc6292a50a8f82a3819}\label{class_matriz_a8ee12c70d979ddc6292a50a8f82a3819} 
+\index{Matriz@{Matriz}!verificarDiagonal@{verificarDiagonal}}
+\index{verificarDiagonal@{verificarDiagonal}!Matriz@{Matriz}}
+\doxysubsubsection{\texorpdfstring{verificarDiagonal()}{verificarDiagonal()}}
+{\footnotesize\ttfamily int Matriz.\+verificar\+Diagonal (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{int}]{fila,  }\item[{int}]{columna,  }\item[{int}]{dF,  }\item[{int}]{dC,  }\item[{int}]{cantidad }\end{DoxyParamCaption})}
+
+
+
+Verifica cuantas fichas de un jugador de manera seguida diagonal hay, dada una direccion. 
+
+Implementacion recursiva para verificar diagonalmente segun las coordenadas de la ultima ficha jugada. Mediante los argumentos de direccion (dF y dC) se puede mover diagonalmente en las 4 direcciones. ~\newline
+ Se compara la ficha insertada contra las de la diagonal verificando que tengan el mismo id. Para cuando encuentra una fila con un id diferente. Se suma 1 cada vez que esto se cumple. /n La suma final esta sobreestimada de manera consistente en 1, lo cual se considera en metodos que utilicen a este metodo.
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & id identificador del jugador. \\
+\hline
+{\em int} & fila jugada. \\
+\hline
+{\em int} & columna jugada. \\
+\hline
+{\em int} & dF direccion de la Fila. \\
+\hline
+{\em int} & dC direccion de la Columna \\
+\hline
+{\em int} & cantidad de iteraciones\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int entero que indica la suma de fichas consecutivas iguales. 
+\end{DoxyReturn}
+\Hypertarget{class_matriz_ad7470b596e5b3cbdeea188eb850d329a}\label{class_matriz_ad7470b596e5b3cbdeea188eb850d329a} 
+\index{Matriz@{Matriz}!verificarDiagonales@{verificarDiagonales}}
+\index{verificarDiagonales@{verificarDiagonales}!Matriz@{Matriz}}
+\doxysubsubsection{\texorpdfstring{verificarDiagonales()}{verificarDiagonales()}}
+{\footnotesize\ttfamily int Matriz.\+verificar\+Diagonales (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{int}]{fila,  }\item[{int}]{columna }\end{DoxyParamCaption})}
+
+
+
+Verifica si hay 4 o más fichas de un jugador de manera seguida en las 2 diagonales. 
+
+Llama al metodo verificar\+Diagonal y se le dan las direcciones para las 4 diagonales. ~\newline
+ Suma las dos partes de cada diagonal (arriba y abajo) y verifica si es igual o mayor a 4.
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & id identificador del jugador. \\
+\hline
+{\em int} & fila jugada. \\
+\hline
+{\em int} & columna jugada.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int entero que indica si gana diagonalmente (4 gana, -\/1 no ha ganado) 
+\end{DoxyReturn}
+int EJEMPLO = verificar\+Diagonal(id, fila, columna, d\+F, d\+C,\+SUMA) ; //ejemplo\Hypertarget{class_matriz_a975d23196472cc9f9784ac08fefd4dd0}\label{class_matriz_a975d23196472cc9f9784ac08fefd4dd0} 
+\index{Matriz@{Matriz}!verificarEstado@{verificarEstado}}
+\index{verificarEstado@{verificarEstado}!Matriz@{Matriz}}
+\doxysubsubsection{\texorpdfstring{verificarEstado()}{verificarEstado()}}
+{\footnotesize\ttfamily int Matriz.\+verificar\+Estado (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+Verifica el estado de un jugador y determina si ya gano o no. 
+
+Llama a los metodo verificar\+Vertical, verificar\+Horizontal y verificar\+Diagonal para determinar si un jugador ha ganado o no.
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & id identificador del jugador.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int entero que indica el estado (-\/1\+: no ha ganado, 9\+: empate, otros enteros\+: ganó) 
+\end{DoxyReturn}
+\Hypertarget{class_matriz_a6012dc9bd3a5d77d590458865281c07e}\label{class_matriz_a6012dc9bd3a5d77d590458865281c07e} 
+\index{Matriz@{Matriz}!verificarHorizontal@{verificarHorizontal}}
+\index{verificarHorizontal@{verificarHorizontal}!Matriz@{Matriz}}
+\doxysubsubsection{\texorpdfstring{verificarHorizontal()}{verificarHorizontal()}}
+{\footnotesize\ttfamily int Matriz.\+verificar\+Horizontal (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+Verifica si hay 4 o más fichas de un jugador de manera seguida horizontal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & id identificador del jugador. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int entero que indica si gana horizontalmente (2 gana, -\/1 no ha ganado) 
+\end{DoxyReturn}
+\Hypertarget{class_matriz_a19589e2fe6534d3713d6c79db8a0facf}\label{class_matriz_a19589e2fe6534d3713d6c79db8a0facf} 
+\index{Matriz@{Matriz}!verificarVertical@{verificarVertical}}
+\index{verificarVertical@{verificarVertical}!Matriz@{Matriz}}
+\doxysubsubsection{\texorpdfstring{verificarVertical()}{verificarVertical()}}
+{\footnotesize\ttfamily int Matriz.\+verificar\+Vertical (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+Verifica si hay 4 o más fichas de un jugador de manera seguida vertical. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & identificador del jugador. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int entero que indica si gana verticalmente (1 gana, -\/1 no ha ganado) 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Matriz.\+java\end{DoxyCompactItemize}

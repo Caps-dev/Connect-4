@@ -1,0 +1,134 @@
+\doxysection{Interfaz Class Reference}
+\hypertarget{class_interfaz}{}\label{class_interfaz}\index{Interfaz@{Interfaz}}
+Inheritance diagram for Interfaz\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_interfaz}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_interfaz_ad523bcef851c251e8ef2d61a3e393437}{Interfaz}} (\mbox{\hyperlink{class_jugador}{Jugador}} jugador1, \mbox{\hyperlink{class_jugador}{Jugador}} jugador2)
+\begin{DoxyCompactList}\small\item\em Constructor sobrecargado. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_interfaz_a748e3894b9bf3bf88413a04624f3be25}{action\+Performed}} (Action\+Event e)
+\begin{DoxyCompactList}\small\item\em action\+Performed \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_interfaz_aced6fad64f5039680e4489ce187aaeeb}{ventana\+Juego}} (int w, int h, int x, int y)
+\begin{DoxyCompactList}\small\item\em ventana\+Juego \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{class_interfaz_ad4ec8826f668ea016496eb634069a088}{pedir\+Nombre}} (String nombre\+Default)
+\begin{DoxyCompactList}\small\item\em pedir nombre \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{class_interfaz_a63477fdfdaf3cc8bb086a9025f607b22}{ANCHO}} = 400
+\item 
+static int \mbox{\hyperlink{class_interfaz_ad182eef668982c94e8f3d2a598cb8afe}{ALTO}} = 500
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Clase encargada del almacenar toda la interfaz del juego todas las acciones de los botones, etc. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_interfaz_ad523bcef851c251e8ef2d61a3e393437}\label{class_interfaz_ad523bcef851c251e8ef2d61a3e393437} 
+\index{Interfaz@{Interfaz}!Interfaz@{Interfaz}}
+\index{Interfaz@{Interfaz}!Interfaz@{Interfaz}}
+\doxysubsubsection{\texorpdfstring{Interfaz()}{Interfaz()}}
+{\footnotesize\ttfamily Interfaz.\+Interfaz (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_jugador}{Jugador}}}]{jugador1,  }\item[{\mbox{\hyperlink{class_jugador}{Jugador}}}]{jugador2 }\end{DoxyParamCaption})}
+
+
+
+Constructor sobrecargado. 
+
+se utiliza para iniciar el juego en la interfaz, abre el primer frame del juego.
+
+
+\begin{DoxyParams}{Parameters}
+{\em jugador1} & \\
+\hline
+{\em jugador2} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_interfaz_a748e3894b9bf3bf88413a04624f3be25}\label{class_interfaz_a748e3894b9bf3bf88413a04624f3be25} 
+\index{Interfaz@{Interfaz}!actionPerformed@{actionPerformed}}
+\index{actionPerformed@{actionPerformed}!Interfaz@{Interfaz}}
+\doxysubsubsection{\texorpdfstring{actionPerformed()}{actionPerformed()}}
+{\footnotesize\ttfamily void Interfaz.\+action\+Performed (\begin{DoxyParamCaption}\item[{Action\+Event}]{e }\end{DoxyParamCaption})}
+
+
+
+action\+Performed 
+
+son las acciones que reciben los botones
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & los eventos cuando el boton se preciona \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_interfaz_ad4ec8826f668ea016496eb634069a088}\label{class_interfaz_ad4ec8826f668ea016496eb634069a088} 
+\index{Interfaz@{Interfaz}!pedirNombre@{pedirNombre}}
+\index{pedirNombre@{pedirNombre}!Interfaz@{Interfaz}}
+\doxysubsubsection{\texorpdfstring{pedirNombre()}{pedirNombre()}}
+{\footnotesize\ttfamily String Interfaz.\+pedir\+Nombre (\begin{DoxyParamCaption}\item[{String}]{nombre\+Default }\end{DoxyParamCaption})}
+
+
+
+pedir nombre 
+
+pide un nombre al jugador
+
+
+\begin{DoxyParams}{Parameters}
+{\em nombre\+Default} & del jugador sin nombre \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pedir\+Nombre 
+\end{DoxyReturn}
+\Hypertarget{class_interfaz_aced6fad64f5039680e4489ce187aaeeb}\label{class_interfaz_aced6fad64f5039680e4489ce187aaeeb} 
+\index{Interfaz@{Interfaz}!ventanaJuego@{ventanaJuego}}
+\index{ventanaJuego@{ventanaJuego}!Interfaz@{Interfaz}}
+\doxysubsubsection{\texorpdfstring{ventanaJuego()}{ventanaJuego()}}
+{\footnotesize\ttfamily void Interfaz.\+ventana\+Juego (\begin{DoxyParamCaption}\item[{int}]{w,  }\item[{int}]{h,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+ventana\+Juego 
+
+esta es la ventana de juego donde se almacena el juego por completo
+
+
+\begin{DoxyParams}{Parameters}
+{\em w} & tamaño de la pantalla \\
+\hline
+{\em h} & tamaño de la pantalla \\
+\hline
+{\em x} & filas del tablero \\
+\hline
+{\em y} & columnas del tablero \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_interfaz_ad182eef668982c94e8f3d2a598cb8afe}\label{class_interfaz_ad182eef668982c94e8f3d2a598cb8afe} 
+\index{Interfaz@{Interfaz}!ALTO@{ALTO}}
+\index{ALTO@{ALTO}!Interfaz@{Interfaz}}
+\doxysubsubsection{\texorpdfstring{ALTO}{ALTO}}
+{\footnotesize\ttfamily int Interfaz.\+ALTO = 500\hspace{0.3cm}{\ttfamily [static]}}
+
+alto de la pagina \Hypertarget{class_interfaz_a63477fdfdaf3cc8bb086a9025f607b22}\label{class_interfaz_a63477fdfdaf3cc8bb086a9025f607b22} 
+\index{Interfaz@{Interfaz}!ANCHO@{ANCHO}}
+\index{ANCHO@{ANCHO}!Interfaz@{Interfaz}}
+\doxysubsubsection{\texorpdfstring{ANCHO}{ANCHO}}
+{\footnotesize\ttfamily int Interfaz.\+ANCHO = 400\hspace{0.3cm}{\ttfamily [static]}}
+
+ancho de la pagina 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Interfaz.\+java\end{DoxyCompactItemize}

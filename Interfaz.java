@@ -5,38 +5,52 @@ import java.awt.image.BufferedImage;
 
 import java.awt.event.*; //no hemos visto el uso de toda la libreria
 import javax.swing.*;
+//! \class Clase interfaz del juego 4 en linea
+/*!
+  
+  Clase encargada del almacenar toda la interfaz del juego
+  todas las acciones de los botones, etc.
+*/
 
 public class Interfaz extends JFrame implements ActionListener { // intentemos usar la sintaxis que hemos visto
-    Juego juego = new Juego();
-    public static int ANCHO = 400;
-    public static int ALTO = 500;
-    private BufferedImage imagen;
-    private int[][] dibujo = null;
-    private int[] posicionesCirculos;
-    Ranking ranking = new Ranking();
+    Juego juego = new Juego();/*!< instancia la clase juego*/
+    public static int ANCHO = 400;/*!< ancho de la pagina */
+    public static int ALTO = 500;/*!< alto de la pagina*/
+    private BufferedImage imagen;/*!< imagen que representa el tablero*/
+    private int[][] dibujo = null; /*!< dibujo donde esta el tablero y se actualiza los circulos*/
+    private int[] posicionesCirculos;/*!< posiciones de los circulos en x */
+    Ranking ranking = new Ranking(); /*!< instancia del ranking */
     // creo que esto podriamos cambiarlo a como lo vimos en clase
-    JButton bMenu = new JButton("Jugar Cuatro en raya");
-    JButton bRanking = new JButton("Ver ranking");
-    JLabel lMenu = new JLabel("Menu");
+    JButton bMenu = new JButton("Jugar Cuatro en raya"); /*!< boton para jugar */
+    JButton bRanking = new JButton("Ver ranking"); /*!< boton para ver el ranking */
+    JLabel lMenu = new JLabel("Menu"); /*!< label indicando que es el menu */
     // hasta aca
-    Jugador jugador1;
-    Jugador jugador2;
-    String tableroEscogido;
+    Jugador jugador1; /*!<  instancia jugador 1*/ 
+    Jugador jugador2; /*!< instancia jugador 2 */
+    String tableroEscogido; /*!< tamaño del tablero escogido */
     // creo que hacen falta unos comments aqui
-    int indicePosicionB1;
-    int indicePosicionB2;
-    int indicePosicionB3;
-    int indicePosicionB4;
-    int indicePosicionB5;
-    int indicePosicionB6;
-    int indicePosicionB7;
-    int indicePosicionB8;
-    int indicePosicionB9;
-    Jugador actualJugador;
-    int colorActual;
-    int turno = 1; // valor inicial
-    int id = 13;
-    String nombreJugadorActual;
+    int indicePosicionB1; /*!< indice para las posiciones de los circulos de boton 1*/
+    int indicePosicionB2;/*!< indice para las posiciones de los circulos de boton 2*/
+    int indicePosicionB3;/*!< indice para las posiciones de los circulos de boton 3*/
+    int indicePosicionB4;/*!< indice para las posiciones de los circulos de boton 4*/
+    int indicePosicionB5;/*!< indice para las posiciones de los circulos de boton 5*/
+    int indicePosicionB6;/*!< indice para las posiciones de los circulos de boton 6*/
+    int indicePosicionB7;/*!< indice para las posiciones de los circulos de boton 7*/
+    int indicePosicionB8;/*!< indice para las posiciones de los circulos de boton 8*/
+    int indicePosicionB9;/*!< indice para las posiciones de los circulos de boton 9*/
+    Jugador actualJugador;/*!< jugador actual jugando */
+    int colorActual; /*!< color del jugador actual */
+    int turno = 1; /*!< cantidad de turnos para cada jugador */
+    int id = 13; /*!< id del jugador actual */
+    String nombreJugadorActual; /*!< nombre del jugador actual */
+
+    /*! \brief Constructor sobrecargado
+     *
+     * se utiliza para iniciar el juego en la interfaz, abre el primer frame del juego.
+     * 
+     * \param jugador1 
+     * \param jugador2
+     */
 
     public Interfaz(Jugador jugador1, Jugador jugador2) {
         this.jugador1 = jugador1;
@@ -63,6 +77,12 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         setVisible(true);
 
     }
+    /*! \brief actionPerformed
+     *
+     * son las acciones que reciben los botones
+     * 
+     * \param e los eventos cuando el boton se preciona
+     */
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == bMenu) {
@@ -89,7 +109,15 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
                     JOptionPane.INFORMATION_MESSAGE);
         }
     }
-
+    /*! \brief ventanaJuego 
+     *
+     * esta es la ventana de juego donde se almacena el juego por completo
+     * 
+     * \param w tamaño de la pantalla
+     * \param h tamaño de la pantalla
+     * \param x filas del tablero
+     * \param y columnas del tablero
+     */
     public void ventanaJuego(int w, int h, int x, int y) {
         juego.setCantidadDeTurnos(0);
         jugador1.setNombre(pedirNombre("jugador 1")); // valores default por si no hay escogencia
@@ -304,6 +332,15 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         frame.revalidate();
 
     }
+    /*! \brief dibujar linea 
+     *
+     * dibuja una linea en el tablero
+     * 
+     * \param desdeX posicion x para iniciar
+     * \param hastax posicion x para terminar
+     * \param desdeY posicion y para iniciar
+     * \param hastaY posicion Y para terminar
+     */
 
     private void dibujarLinea(int desdeX, int hastaX, int desdeY, int hastaY) {
 
@@ -313,7 +350,11 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
             }
         }
     }
-
+    /*! \brief cambio Jugador 
+     *
+     * cambia al jugador despues de haber jugado
+     * 
+     */
     private void cambioJugador() {
 
         if (turno == 1) {
@@ -329,6 +370,13 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         }
 
     }
+    /*! \brief pedir nombre 
+     *
+     * pide un nombre al jugador
+     * 
+     * \param nombreDefault del jugador sin nombre
+     * \return pedirNombre
+     */
 
     public String pedirNombre(String nombreDefault) {
         String nombre = JOptionPane.showInputDialog("digite su nombre");
@@ -338,6 +386,20 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         return nombre;
     }
 
+
+    /*! \brief juegoBoton 
+     *
+     * parte de las acciones del boton como agregar ficha
+     * 
+     * \param w 
+     * \param h
+     * \param tablero del juego
+     * \param x posicion del circulo en x
+     * \param columna donde se agrega la ficha
+     * \param indice de la posicion del de los circulos
+     * \param color del jugador actual
+     * \param id del jugador actual
+     */
     private int juegoBoton(int w, int h, Matriz tablero, int x, int columna, int indice, int color, int id) {
         juego.verificarGanador(tablero, jugador1.getId(), jugador2.getId());
         int status = tablero.agregarFicha(columna, id);
@@ -347,9 +409,7 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
             JOptionPane.showMessageDialog(null, "No puede agregar más ficha en esta columna", "Hey!",
                     JOptionPane.ERROR_MESSAGE);
         } else {
-            tablero.imprimir();
             juego.SumarTurno();
-            System.out.println("-------------");
             // Color c1 = new Color(158, 251, 179);
             if (indice < posicionesCirculos.length && indice >= 0) {
                 dibujarCirculo(x, posicionesCirculos[indice], 20, color, true);
@@ -358,6 +418,16 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         }
         return juego.verificarGanador(tablero, jugador1.getId(), jugador2.getId());
     }
+    /*! \brief dibujarCirculo 
+     *
+     * agrega las lineas del tablero
+     * 
+     * \param x posicion del circulo en x
+     * \param y posicion del circulo en y
+     * \param radio del circulo
+     * \param color del jugador actual
+     * \param rellenos 
+     */
 
     private void dibujarCirculo(int x, int y, int radio, int color, boolean rellenos) {
         double x1, y1;
@@ -380,6 +450,17 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         }
     }
 
+    /*! \brief dibujarLinea2
+     *
+     * dibuja el relleno del circulo
+     * 
+     * \param fI 
+     * \param cI
+     * \param fF
+     * \param cF
+     * \param color
+     */
+
     private void dibujarLinea2(int fI, int cI, int fF, int cF, int color) {
         int fInicialCopia = fI < fF ? fI : fF;
         fF = fI > fF ? fI : fF;
@@ -396,6 +477,17 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         }
 
     }
+    /*! \brief recargarCuadro
+     *
+     * recarga todos los cuadros del juego
+     * 
+     * \param frame 
+     * \param panel
+     * \param layeredPane
+     * \param imagenLabel
+     * \param w
+     * \param h
+     */
 
     private void recargarCuadros(JFrame frame, JPanel panel, JLayeredPane layeredPane, JLabel imagenLabel, int w,
             int h) {
@@ -409,6 +501,12 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         panel.repaint();
         frame.repaint();
     }
+    /*! \brief pedirColor
+     *
+     * cambia el color del jugador
+     * 
+     * \param colorDefault 
+     */
 
     private int pedirColor(int colorDefault) {
         Color color;
@@ -423,6 +521,23 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
 
         return colorRGB;
     }
+    /*! \brief accionarBoton
+     *
+     * Las acciones que hacen los botones en el juego, agregan botones y verifican el ganador
+     * 
+     * \param jugadorActual 
+     * \param frame
+     * \param tablero
+     * \param w
+     * \param h
+     * \param x
+     * \param columna
+     * \param turnosLabel
+     * \param panel
+     * \param layeredPane
+     * \param imagenLabel
+     * \param indice
+     */
 
     private void accionarBoton(JLabel jugadorActual, JFrame frame, Matriz tablero, int w, int h, int x, int columna,
             JLabel turnosLabel, JPanel panel, JLayeredPane layeredPane, JLabel imagenLabel, int indice) {
@@ -439,15 +554,16 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
                     "Hey!",
                     JOptionPane.INFORMATION_MESSAGE, imageIcon);
 
+            
+
+            ranking.actualizarRanking((id != jugador1.getId()) ? jugador1.getNombre() : jugador2.getNombre(),
+                    juego.getCantidadDeTurnos());
+            ranking.ordenarRanking();
             // Restablecer valores al estado inicial
             turno = 1;
             id = 13;
             nombreJugadorActual = jugador1.getNombre();
             resetPosicionesBotones();
-
-            ranking.actualizarRanking((id != jugador1.getId()) ? jugador1.getNombre() : jugador2.getNombre(),
-                    juego.getCantidadDeTurnos());
-            ranking.ordenarRanking();
             frame.setVisible(false);
             setVisible(true);
             return;
@@ -475,6 +591,10 @@ public class Interfaz extends JFrame implements ActionListener { // intentemos u
         turnosLabel.setText("Turno: " + juego.getCantidadDeTurnos());
         recargarCuadros(frame, panel, layeredPane, imagenLabel, w, h);
     }
+    /*! \brief resetPosicionesBotones
+     *
+     * resetea todos los indices de las posiciones
+     */
 
     private void resetPosicionesBotones() {
         indicePosicionB1 = posicionesCirculos.length - 1;
